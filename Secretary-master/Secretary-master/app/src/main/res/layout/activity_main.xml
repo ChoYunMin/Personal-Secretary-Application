@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_main"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.nawoo.secretaryproject.MainActivity">
+
+    <TextView
+        android:id="@+id/ScheduleListText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schedule List"
+        android:textColor="@color/mainColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/ScheduleListText">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_sun"
+            android:text="SUN"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_mon"
+            android:text="MON"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_tue"
+            android:text="TUE"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_wed"
+            android:text="WED"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_thu"
+            android:text="THU"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_fri"
+            android:text="FRI"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_sat"
+            android:text="SAT"
+            android:textColor="#D7D4D1"
+            android:background="@color/invisiableColor"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</RelativeLayout>
