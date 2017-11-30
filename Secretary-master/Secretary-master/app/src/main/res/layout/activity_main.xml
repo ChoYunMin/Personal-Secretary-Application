@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_sun"
             android:text="SUN"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_mon"
             android:text="MON"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1"/>
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_tue"
             android:text="TUE"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1"/>
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_wed"
             android:text="WED"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1"/>
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_thu"
             android:text="THU"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1"/>
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_fri"
             android:text="FRI"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1"/>
 
@@ -82,9 +82,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_sat"
             android:text="SAT"
-            android:textColor="#D7D4D1"
+            android:textColor="@drawable/text_color_selector"
             android:background="@color/invisiableColor"
             android:layout_weight="1"/>
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 </RelativeLayout>
