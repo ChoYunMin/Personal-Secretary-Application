@@ -10,87 +10,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.nawoo.secretaryproject.MainActivity">
 
-    <TextView
-        android:id="@+id/ScheduleListText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Schedule List"
-        android:textColor="@color/mainColor"/>
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/ScheduleListText">
+        android:layout_weight="1"
+        android:id="@+id/main_fragment_view"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_sun"
-            android:text="SUN"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_mon"
-            android:text="MON"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_tue"
-            android:text="TUE"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_wed"
-            android:text="WED"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_thu"
-            android:text="THU"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_fri"
-            android:text="FRI"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_sat"
-            android:text="SAT"
-            android:textColor="@drawable/text_color_selector"
-            android:background="@color/invisiableColor"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <ListView
+    <Button
+        android:id="@+id/switch_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ListView>
+        android:layout_height="wrap_content"
+        android:text="Switch Fragment"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"/>
 
 </RelativeLayout>
