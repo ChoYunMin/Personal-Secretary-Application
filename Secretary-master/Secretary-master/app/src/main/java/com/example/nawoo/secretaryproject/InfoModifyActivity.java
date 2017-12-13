@@ -19,40 +19,36 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class JoinActivity extends AppCompatActivity {
+public class InfoModifyActivity extends AppCompatActivity {
 
     final Context context = this;
-    EditText et_id, et_pw, et_pw_chk, et_name;
-    String sId, sPw, sPw_chk, sName;
+    EditText et_pw, et_pw_chk, et_name;
+    String sPw, sPw_chk, sName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join);
+        setContentView(R.layout.activity_info_modify);
 
-        et_id = (EditText) findViewById(R.id.et_id);
-        et_pw = (EditText) findViewById(R.id.et_Password);
-        et_pw_chk = (EditText) findViewById(R.id.et_Password_chk);
-        et_name = (EditText) findViewById(R.id.et_Name);
-
-
+        et_pw = (EditText) findViewById(R.id.mdf_Password);
+        et_pw_chk = (EditText) findViewById(R.id.mdf_Password_chk);
+        et_name = (EditText) findViewById(R.id.mdf_Name);
     }
-    public void bt_Join(View view)
+
+    public void bt_Modify_ok(View view)
     {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
 
-        sId = et_id.getText().toString();
         sPw = et_pw.getText().toString();
         sPw_chk = et_pw_chk.getText().toString();
         sName = et_name.getText().toString();
 
         if(sPw.equals(sPw_chk))
         {
-            registDB rdb = new registDB();
+            modifyDB rdb = new modifyDB();
             rdb.execute();
         }
-        else
-        {
+        else{
             Log.e("RESULT","비밀번호 확인 실패");
             alertBuilder
                     .setTitle("알림")
@@ -68,17 +64,18 @@ public class JoinActivity extends AppCompatActivity {
             dialog.show();
         }
     }
-    public class registDB extends AsyncTask<Void, Integer, Void> {
+    public class modifyDB extends AsyncTask<Void, Integer, Void> {
         String data = "";
+
         @Override
         protected Void doInBackground(Void... unused) {
 
 /* 인풋 파라메터값 생성 */
-            String param = "u_id=" + sId + "&u_pw=" + sPw + "&u_name=" + sName + "";
+            String param = "u_id=" + SessionControl.loginID + "&u_pw=" + sPw + "&u_name=" + sName + "";
             try {
 /* 서버연결 */
                 URL url = new URL(
-                        "http://172.30.1.9:80/Secretary/Join.php");
+                        "http://172.30.1.9:80/Secretary/InfoModify.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
@@ -114,6 +111,7 @@ public class JoinActivity extends AppCompatActivity {
             return null;
 
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -121,14 +119,14 @@ public class JoinActivity extends AppCompatActivity {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
 
         /* 서버에서 응답 */
-            Log.e("RECV DATA",data);
+            Log.e("RECV DATA", data);
 
-            if(data.equals("succeed"))
-            {
-                Log.e("RESULT","성공적으로 처리되었습니다!");
+            if (data.equals("succeed")) {
+                Log.e("RESULT", "성공적으로 처리되었습니다!");
+                SessionControl.loginName = sName;
                 alertBuilder
                         .setTitle("알림")
-                        .setMessage("성공적으로 등록되었습니다!")
+                        .setMessage("성공적으로 수정되었습니다!")
                         .setCancelable(true)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
@@ -138,10 +136,8 @@ public class JoinActivity extends AppCompatActivity {
                         });
                 AlertDialog dialog = alertBuilder.create();
                 dialog.show();
-            }
-            else
-            {
-                Log.e("RESULT","에러 발생! ERRCODE = " + data);
+            } else {
+                Log.e("RESULT", "에러 발생! ERRCODE = " + data);
                 alertBuilder
                         .setTitle("알림")
                         .setMessage(data)
@@ -158,4 +154,3 @@ public class JoinActivity extends AppCompatActivity {
         }
     }
 }
-
