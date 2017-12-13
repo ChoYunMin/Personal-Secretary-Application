@@ -129,7 +129,7 @@ public class JoinActivity extends AppCompatActivity {
                 Log.e("RESULT","에러 발생! ERRCODE = " + data);
                 alertBuilder
                         .setTitle("알림")
-                        .setMessage("등록중 에러가 발생했습니다! errcode : "+ data)
+                        .setMessage(data)
                         .setCancelable(true)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
