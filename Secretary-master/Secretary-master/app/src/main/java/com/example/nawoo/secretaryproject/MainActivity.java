@@ -5,14 +5,18 @@ package com.example.nawoo.secretaryproject;
  */
 
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.first :
                 Toast.makeText(this, "사용자 정보",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(
+                        getApplicationContext(), // 현재 화면의 제어권자
+                        UserInfoActivity.class); // 다음 넘어갈 클래스 지정
+                startActivity(intent); // 다음 화면으로 넘어간다
                 break;
             case R.id.second :
                 Toast.makeText(this, "기능1",Toast.LENGTH_SHORT).show();
@@ -148,5 +156,20 @@ public class MainActivity extends AppCompatActivity {
             return null;
 
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Quit").setMessage("종료 하시겠습니까?").setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which){
+                    moveTaskToBack(true);
+                    finish();
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                }
+            }).setNegativeButton("No",null).show();
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
     }
 }
