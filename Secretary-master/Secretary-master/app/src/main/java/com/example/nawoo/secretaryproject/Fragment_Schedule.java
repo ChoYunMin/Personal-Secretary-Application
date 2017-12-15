@@ -54,8 +54,6 @@ public class Fragment_Schedule extends Fragment {
     ListView mlistView;
     String mJsonString;
 
-    ImageView imView;
-    Bitmap bmImg;
     phpDown task;
     TextView txtView;
 
