@@ -8,6 +8,7 @@ package com.example.nawoo.secretaryproject;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         // ActionBar에 + 버튼을 클릭했을 때의 동작
-
+        Intent intent = new Intent(this, AddScheduleActivity.class);
+        startActivity(intent);
         return true;
     }
 
