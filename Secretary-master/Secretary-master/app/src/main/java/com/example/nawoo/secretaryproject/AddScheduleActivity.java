@@ -4,10 +4,12 @@ import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dbsal on 2017-12-12.
@@ -90,6 +94,13 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         title = (EditText)findViewById(R.id.schedule_title);
         memo = (EditText)findViewById(R.id.schedule_memo);
 
+        // 반복횟수 지정 라디오 다이얼로그
+        b = (Button)findViewById(R.id.btn_set_repeat);
+        b.setOnClickListener(new View.OnClickListener(){
+           public void onClick(View v){
+               showSelectRepeatDialog();
+           }
+        });
     }
 
     // 알람의 설정
@@ -100,6 +111,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
 
         Log.i("AlarmActivity!", mCalendar.getTime().toString());
 
+        // 디비에 저장할 형식에 맞춰서 변환
         String date = Integer.toString(mDate.getYear()) + Integer.toString(mDate.getMonth()) + Integer.toString(mDate.getDayOfMonth());
         String time = Integer.toString(mTime.getHour()) + ":" + Integer.toString(mTime.getMinute()) + ":" + "00";
 
@@ -146,5 +158,46 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
         mCalendar.set(mDate.getYear(), mDate.getMonth(), mDate.getDayOfMonth(), hourOfDay, minute);
         Log.i("HelloAlarmActivity", mCalendar.getTime().toString());
+    }
+
+    // 반복 횟수 지정하는 라디오 다이얼로그
+    private void showSelectRepeatDialog() {
+        final List<String> ListItems = new ArrayList<>();
+        ListItems.add("반복 없음");
+        ListItems.add("한 번");
+        ListItems.add("매일");
+        ListItems.add("매주");
+        ListItems.add("매달");
+        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
+
+        // 선택된 아이템 (기본값 0)
+        final List SelectedItems = new ArrayList();
+        int defaultItem = 0;
+        SelectedItems.add(defaultItem);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("반복 횟수 선택");
+        builder.setSingleChoiceItems(items, defaultItem, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                SelectedItems.clear();
+                SelectedItems.add(which);
+            }
+        });
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which){
+                    String msg="";
+                    if(!SelectedItems.isEmpty()){
+                        int index = (int)SelectedItems.get(0);
+                        msg = ListItems.get(index);
+                    }
+
+                }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+           public void onClick(DialogInterface dialog, int which){
+
+           }
+        });
+        builder.show();
     }
 }
