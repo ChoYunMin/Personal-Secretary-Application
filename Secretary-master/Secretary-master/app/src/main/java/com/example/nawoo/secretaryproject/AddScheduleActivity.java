@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -41,6 +40,9 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
 
     // 스케줄 제목과 내용
     private EditText title, memo;
+
+    // 반복 횟수
+    private String repeatnum;
 
     /*
     통지 관련 맴버 변수
@@ -107,7 +109,19 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     private void setAlarm() throws MalformedURLException {
         // AlarmManager 호출
         //mManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        mManager.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pendingIntent());
+        if(repeatnum == "반복 없음"){
+            mManager.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pendingIntent());
+        }
+        else if(repeatnum == "매일"){ // 매일반복
+            mManager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 86400000, pendingIntent());
+        }
+        else if(repeatnum == "매주"){
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
+        else if(repeatnum == "매달"){
+
+        }
+
 
         Log.i("AlarmActivity!", mCalendar.getTime().toString());
 
@@ -164,7 +178,6 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     private void showSelectRepeatDialog() {
         final List<String> ListItems = new ArrayList<>();
         ListItems.add("반복 없음");
-        ListItems.add("한 번");
         ListItems.add("매일");
         ListItems.add("매주");
         ListItems.add("매달");
@@ -185,10 +198,10 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         });
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which){
-                    String msg="";
+                    repeatnum="";
                     if(!SelectedItems.isEmpty()){
                         int index = (int)SelectedItems.get(0);
-                        msg = ListItems.get(index);
+                        repeatnum = ListItems.get(index);
                     }
 
                 }
