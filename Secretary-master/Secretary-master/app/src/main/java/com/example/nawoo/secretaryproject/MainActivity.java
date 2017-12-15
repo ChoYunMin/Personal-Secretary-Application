@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         // ActionBar에 + 버튼을 클릭했을 때의 동작
-        switch(item.getItemId()){
+        /*switch(item.getItemId()){
             case R.id.first :
                 Toast.makeText(this, "사용자 정보",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(
@@ -85,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.second :
                 Toast.makeText(this, "기능1",Toast.LENGTH_SHORT).show();
                 break;
-        }
+        }*/
+        Intent intent = new Intent(this, AddScheduleActivity.class);
+        startActivity(intent);
         return true;
     }
 
