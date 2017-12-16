@@ -143,7 +143,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
 
         try{
             PHPRequest request = new PHPRequest("http://211.214.113.144:8888/Dproject/add_schedule.php");
-            String result = request.PHPtest(title.getText().toString(), memo.getText().toString(), date, time);
+            String result = request.AddSchedule(SessionControl.loginID, title.getText().toString(), memo.getText().toString(), date, time);
             if(result.equals("1")){
                 //Toast.makeText(getApplication(), "들어감", Toast.LENGTH_SHORT).show();
             }

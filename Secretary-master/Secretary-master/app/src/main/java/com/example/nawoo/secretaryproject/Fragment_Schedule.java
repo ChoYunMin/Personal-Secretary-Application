@@ -26,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -126,11 +127,21 @@ public class Fragment_Schedule extends Fragment {
 
 
             try {
-
                 URL url = new URL(serverURL);
+                // userID 보내는 경로
+                PHPRequest request = new PHPRequest(serverURL);
+                String sendUserID = request.SendUserID(SessionControl.loginID);
+                if(sendUserID.equals("1")){
+                    //Toast.makeText(getApplication(), "들어감", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "들어감들어감");
+                }
+                else{
+                    //Toast.makeText(getApplication(), "안들어감", Toast.LENGTH_SHORT).show();
+                }
+
+
+                // 받는 경로
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-
                 httpURLConnection.setReadTimeout(5000);
                 httpURLConnection.setConnectTimeout(5000);
                 httpURLConnection.connect();
