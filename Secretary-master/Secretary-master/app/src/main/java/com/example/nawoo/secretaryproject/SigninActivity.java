@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -115,7 +114,6 @@ public class SigninActivity extends AppCompatActivity {
     public void bt_Sign_In(View v)
     {
         if(autologin.isChecked()){
-            Toast.makeText(this, "로그인", Toast.LENGTH_SHORT).show();
             String ID = et_id.getText().toString();
             String PW = et_pw.getText().toString();
             editor.putString("ID", ID);
@@ -157,7 +155,7 @@ public class SigninActivity extends AppCompatActivity {
 
 
                 URL url = new URL(
-                        "http://172.30.1.9:8888/Secretary/SignIn.php");
+                        "http://211.214.113.144:8888/Dproject/SignIn.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

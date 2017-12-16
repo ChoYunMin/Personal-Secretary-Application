@@ -80,7 +80,7 @@ public class JoinActivity extends AppCompatActivity {
             try {
 /* 서버연결 */
                 URL url = new URL(
-                        "http://172.30.1.9:8888/Secretary/Join.php");
+                        "http://211.214.113.144:8888/Dproject/Join.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

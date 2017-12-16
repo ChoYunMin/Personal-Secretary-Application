@@ -75,7 +75,7 @@ public class InfoModifyActivity extends AppCompatActivity {
             try {
 /* 서버연결 */
                 URL url = new URL(
-                        "http://172.30.1.9:80/Secretary/InfoModify.php");
+                        "http://211.214.113.144:8888/Dproject/InfoModify.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

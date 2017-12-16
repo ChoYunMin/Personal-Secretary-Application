@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 URL url = new URL(
-                        "http://172.30.1.9:8888/Secretary/getData.php");
+                        "http://211.214.113.144:8888/Dproject/getData.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
