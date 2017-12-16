@@ -98,8 +98,8 @@ public class Fragment_Schedule extends Fragment {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            mTextViewResult.setText(result);
-            Log.d(TAG, "response  - " + result);
+            //mTextViewResult.setText(result);
+            //Log.d(TAG, "response  - " + result);
 
             if (result == null){
 

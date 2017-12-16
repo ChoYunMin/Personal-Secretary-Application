@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".SigninActivity">
@@ -33,7 +34,7 @@
         <activity android:name=".UserInfoActivity" />
         <activity android:name=".InfoModifyActivity" />
         <activity android:name=".AddScheduleActivity" />
-        <activity android:name=".AddFreindActivity"></activity>
+        <activity android:name=".AddFreindActivity" />
     </application>
 
 </manifest>

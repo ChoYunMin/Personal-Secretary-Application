@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:text="Switch Fragment"
         android:layout_alignParentBottom="true"
+        android:textColor="@drawable/text_color_selector"
+        android:background="@drawable/my_button"
         android:textSize="20sp"/>
 
 </RelativeLayout>

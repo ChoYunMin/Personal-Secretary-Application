@@ -4,10 +4,22 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/friend_ListText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friends List"
+        android:textColor="@color/mainColor"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="Friends LIst Fragment"
-        android:gravity="center"/>
+        android:id="@+id/txt"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:id="@+id/friends_list"/>
 
 </LinearLayout>

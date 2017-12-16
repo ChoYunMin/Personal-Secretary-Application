@@ -81,16 +81,16 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:id="@+id/lsitView_list"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtView"/>
+
+    <ListView
+        android:id="@+id/lsitView_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp" />
 
 </LinearLayout>
