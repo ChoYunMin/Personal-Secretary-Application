@@ -45,9 +45,10 @@ public class Fragment_Schedule extends Fragment {
 
     private static String TAG = "phptest";
     private static final String TAG_JSON="webnautes";
-    private static final String TAG_ID="id";
-    private static final String TAG_PASSWORD="password";
-    private static final String TAG_NAME="name";
+    private static final String TAG_TITLE="title";
+    private static final String TAG_MEMO="memo";
+    private static final String TAG_DATE="date";
+    private static final String TAG_TIME="time";
 
     private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
@@ -74,7 +75,7 @@ public class Fragment_Schedule extends Fragment {
 
         task = new phpDown();
         txtView = (TextView)v.findViewById(R.id.txtView);
-        task.execute("http://211.214.113.144:8888/Dproject/userdata.php");
+        task.execute("http://211.214.113.144:8888/Dproject/userSchedule.php");
 
         return v;
     }
@@ -185,23 +186,25 @@ public class Fragment_Schedule extends Fragment {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String id = item.getString(TAG_ID);
-                String name = item.getString(TAG_PASSWORD);
-                String address = item.getString(TAG_NAME);
+                String title = item.getString(TAG_TITLE);
+                String memo = item.getString(TAG_MEMO);
+                String date = item.getString(TAG_DATE);
+                String time = item.getString(TAG_TIME);
 
                 HashMap<String,String> hashMap = new HashMap<>();
 
-                hashMap.put(TAG_ID, id);
-                hashMap.put(TAG_PASSWORD, name);
-                hashMap.put(TAG_NAME, address);
+                hashMap.put(TAG_TITLE, title);
+                hashMap.put(TAG_MEMO, memo);
+                hashMap.put(TAG_DATE, date);
+                hashMap.put(TAG_TIME, time);
 
                 mArrayList.add(hashMap);
             }
 
             ListAdapter adapter = new SimpleAdapter(
                     getActivity(), mArrayList, R.layout.item_list,
-                    new String[]{TAG_ID,TAG_PASSWORD, TAG_NAME},
-                    new int[]{R.id.textView_list_id, R.id.textView_list_password, R.id.textView_list_name}
+                    new String[]{TAG_TIME, TAG_TITLE},
+                    new int[]{R.id.textView_list_time, R.id.textView_list_title}
             );
 
             mlistView.setAdapter(adapter);

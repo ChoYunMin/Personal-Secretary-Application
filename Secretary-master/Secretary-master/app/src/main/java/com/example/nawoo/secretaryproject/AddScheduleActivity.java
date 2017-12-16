@@ -46,6 +46,9 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     // 반복 횟수
     private String repeatnum;
 
+    // 원하는 기능 type
+    private List<Integer> selectedFuntions = new ArrayList<>();
+
     /*
     통지 관련 맴버 변수
     */
@@ -106,6 +109,14 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                showSelectRepeatDialog();
            }
         });
+
+        // 원하는 기능 설정
+        b = (Button)findViewById(R.id.btn_choose_function);
+        b.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                showSelectFunctionDialog();
+            }
+        });
     }
 
     // 알람의 설정
@@ -127,7 +138,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         Log.i("AlarmActivity!", mCalendar.getTime().toString());
 
         // 디비에 저장할 형식에 맞춰서 변환
-        String date = Integer.toString(mDate.getYear()) + Integer.toString(mDate.getMonth()) + Integer.toString(mDate.getDayOfMonth());
+        String date = Integer.toString(mDate.getYear()) + Integer.toString(mDate.getMonth() + 1) + Integer.toString(mDate.getDayOfMonth());
         String time = Integer.toString(mTime.getHour()) + ":" + Integer.toString(mTime.getMinute()) + ":" + "00";
 
         try{
@@ -212,5 +223,30 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
            }
         });
         builder.show();
+    }
+
+    // 원하는 기능 선택하는 체크박스 다이얼로그
+    private void showSelectFunctionDialog(){
+        final boolean [] chkList = {false, false, false, false};
+        final String [] chkStrList = {"알람 울려주기", "날씨 보여주기", "교통상황 보여주기", "무음모드 전환"};
+
+        new AlertDialog.Builder(this)
+                .setTitle("원하는 기능 선택")
+                .setCancelable(false)
+                .setMultiChoiceItems(chkStrList, chkList, new DialogInterface.OnMultiChoiceClickListener(){
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b){
+                        chkList[i] = b;
+                    }
+                }
+        ).setPositiveButton("확인", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialogInterface, int i){
+                for(int k = 0; k<chkList.length; k++){
+                    if(chkList[k]){
+                        // type을 저장하는 list에 선택된 타입들 저장
+                        selectedFuntions.add(k);
+                    }
+                }
+            }
+        }).show();
     }
 }

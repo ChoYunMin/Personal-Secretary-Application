@@ -47,6 +47,17 @@
             android:textColor="@color/white"
             android:text="반복 횟수 설정"/>
 
+        <Button
+            android:id="@+id/btn_choose_function"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@color/mainColor"
+            android:textColor="@color/white"
+            android:text="원하는 기능 설정" />
+
         <FrameLayout
             android:id="@+id/fagment_view_choose"
             android:layout_width="match_parent"
