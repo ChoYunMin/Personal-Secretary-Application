@@ -15,7 +15,7 @@
 
             <item
                 android:id="@+id/second"
-                android:title="기능 1" />
+                android:title="스케쥴 추가" />
 
             <item
                 android:id="@+id/third"
