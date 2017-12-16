@@ -56,10 +56,10 @@ public class PHPRequest {
         }
     }
 
-    // 현재 로그인 된 사용자 아이디 전송
-    public String SendUserID(final String userID){
+    // 스케줄 타입도 저장
+    public String AddScheduleType(final String title, final Integer type){
         try{
-            String postData = "USERID=" + userID;
+            String postData = "SCHEDULENAME=" + title + "&" + "SCHEDULETYPE=" + type;
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestMethod("POST");
@@ -79,4 +79,6 @@ public class PHPRequest {
             return null;
         }
     }
+
+
 }

@@ -47,7 +47,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     private String repeatnum;
 
     // 원하는 기능 type
-    private List<Integer> selectedFuntions = new ArrayList<>();
+    private List<Integer> selectedFunctions = new ArrayList<>();
 
     /*
     통지 관련 맴버 변수
@@ -137,6 +137,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
 
         Log.i("AlarmActivity!", mCalendar.getTime().toString());
 
+        // user schedule 저장
         // 디비에 저장할 형식에 맞춰서 변환
         String date = Integer.toString(mDate.getYear()) + Integer.toString(mDate.getMonth() + 1) + Integer.toString(mDate.getDayOfMonth());
         String time = Integer.toString(mTime.getHour()) + ":" + Integer.toString(mTime.getMinute()) + ":" + "00";
@@ -155,6 +156,23 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             e.printStackTrace();
         }
 
+
+        // schedule type에도 저장
+        for(int a = 0; a<selectedFunctions.size(); a++){
+            try{
+                PHPRequest request2 = new PHPRequest("http://211.214.113.144:8888/Dproject/add_schedule_type.php");
+                String result = request2.AddScheduleType(title.getText().toString(), selectedFunctions.get(a));
+                if(result.equals("1")){
+                    //Toast.makeText(getApplication(), "들어감", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    //Toast.makeText(getApplication(), "안들어감", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch(MalformedURLException e){
+                e.printStackTrace();
+            }
+        }
 
         finish();
     }
@@ -240,10 +258,10 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                 }
         ).setPositiveButton("확인", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialogInterface, int i){
-                for(int k = 0; k<chkList.length; k++){
-                    if(chkList[k]){
+                for(int k = 1; k <= chkList.length; k++){
+                    if(chkList[k-1]){
                         // type을 저장하는 list에 선택된 타입들 저장
-                        selectedFuntions.add(k);
+                        selectedFunctions.add(k);
                     }
                 }
             }

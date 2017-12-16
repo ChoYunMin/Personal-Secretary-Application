@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -71,6 +72,12 @@ public class Fragment_Schedule extends Fragment {
         txtView = (TextView)v.findViewById(R.id.txtView);
         task.execute("http://211.214.113.144:8888/Dproject/userSchedule.php");
 
+        mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                //////////////스키줄 눌렀을 때 activity_detail_schedule로 넘어가기
+            }
+        });
+
         return v;
     }
 
@@ -99,7 +106,6 @@ public class Fragment_Schedule extends Fragment {
 
             progressDialog.dismiss();
             //mTextViewResult.setText(result);
-            //Log.d(TAG, "response  - " + result);
 
             if (result == null){
 
@@ -122,15 +128,7 @@ public class Fragment_Schedule extends Fragment {
             try {
                 URL url = new URL(serverURL);
                 // userID 보내는 경로
-                //PHPRequest request = new PHPRequest(serverURL);
-                //String sendUserID = request.SendUserID(SessionControl.loginID);
-                /*if(sendUserID.equals("1")){
-                    //Toast.makeText(getApplication(), "들어감", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "들어감들어감");
-                }
-                else{
-                    //Toast.makeText(getApplication(), "안들어감", Toast.LENGTH_SHORT).show();
-                }*/
+
 
                 String postData = "USERID=" + SessionControl.loginID;
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
