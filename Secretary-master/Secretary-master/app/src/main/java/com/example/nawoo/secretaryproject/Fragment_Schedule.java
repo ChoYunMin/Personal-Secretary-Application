@@ -2,8 +2,6 @@ package com.example.nawoo.secretaryproject;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -23,13 +19,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,33 +122,46 @@ public class Fragment_Schedule extends Fragment {
             try {
                 URL url = new URL(serverURL);
                 // userID 보내는 경로
-                PHPRequest request = new PHPRequest(serverURL);
-                String sendUserID = request.SendUserID(SessionControl.loginID);
-                if(sendUserID.equals("1")){
+                //PHPRequest request = new PHPRequest(serverURL);
+                //String sendUserID = request.SendUserID(SessionControl.loginID);
+                /*if(sendUserID.equals("1")){
                     //Toast.makeText(getApplication(), "들어감", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "들어감들어감");
                 }
                 else{
                     //Toast.makeText(getApplication(), "안들어감", Toast.LENGTH_SHORT).show();
-                }
+                }*/
+
+                String postData = "USERID=" + SessionControl.loginID;
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+                OutputStream outputStream = conn.getOutputStream();
+                outputStream.write(postData.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+                conn.disconnect();
 
 
                 // 받는 경로
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.connect();
+                //HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(5000);
+                conn.setConnectTimeout(5000);
+                conn.connect();
 
 
-                int responseStatusCode = httpURLConnection.getResponseCode();
+                int responseStatusCode = conn.getResponseCode();
                 Log.d(TAG, "response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
+                    inputStream = conn.getInputStream();
                 }
                 else{
-                    inputStream = httpURLConnection.getErrorStream();
+                    inputStream = conn.getErrorStream();
                 }
 
 

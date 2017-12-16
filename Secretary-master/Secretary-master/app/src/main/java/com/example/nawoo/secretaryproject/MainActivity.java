@@ -32,7 +32,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean isFragmentSchedule = true;
+    private boolean isFragmentSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF891D32));
 
         // shedule/friends 프래그먼트 변경
+        isFragmentSchedule = true;
         android.app.FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.add(R.id.main_fragment_view, new Fragment_Schedule());
@@ -73,21 +74,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         // ActionBar에 + 버튼을 클릭했을 때의 동작
-        Intent intent = new Intent(this, AddScheduleActivity.class);
-        startActivity(intent);
+        if(isFragmentSchedule){
+            Intent intent1 = new Intent(this, AddScheduleActivity.class);
+            startActivity(intent1);
+        } else {
+            Intent intent2 = new Intent(this, AddFreindActivity.class);
+            startActivity(intent2);
+        }
+
         return true;
     }
 
     public void switchFragment(){
         Fragment fr;
 
+        isFragmentSchedule = (isFragmentSchedule) ? false : true;
+
         if(isFragmentSchedule){
             fr = new Fragment_Schedule();
         } else {
             fr = new Fragment_Friends();
         }
-
-        isFragmentSchedule = (isFragmentSchedule) ? false : true;
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
@@ -100,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... unuesd) {
 /* 인풋 파라메터값 생성 */
-            String param = "u_id=" + SessionControl.loginID  + "&" + "";
+            String param = "u_id=" + SessionControl.loginID;
             Log.e("POST", param);
             try {
 /* 서버연결 */
