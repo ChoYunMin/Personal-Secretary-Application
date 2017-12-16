@@ -7,28 +7,6 @@
     <item android:id="@+id/add_schedule"
         android:title="+"
         app:showAsAction="always">
-        <menu>
-
-            <item
-                android:id="@+id/first"
-                android:title="사용자 정보" />
-
-            <item
-                android:id="@+id/second"
-                android:title="스케쥴 추가" />
-
-            <item
-                android:id="@+id/third"
-                android:title="기능 2" />
-
-            <item
-                android:id="@+id/fourth"
-                android:title="기능 3" />
-
-            <item
-                android:id="@+id/fivth"
-                android:title="기능 4" />
-        </menu>
     </item>
 
 </menu>

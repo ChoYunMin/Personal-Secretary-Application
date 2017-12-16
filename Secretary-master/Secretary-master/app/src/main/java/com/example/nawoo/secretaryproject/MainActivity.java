@@ -21,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,21 +73,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         // ActionBar에 + 버튼을 클릭했을 때의 동작
-        switch(item.getItemId()){
-            case R.id.first :
-                Toast.makeText(this, "사용자 정보",Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(
-                        getApplicationContext(), // 현재 화면의 제어권자
-                        UserInfoActivity.class); // 다음 넘어갈 클래스 지정
-                startActivity(intent1); // 다음 화면으로 넘어간다
-                break;
-            case R.id.second :
-                Toast.makeText(this, "스케쥴 추가",Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(this, AddScheduleActivity.class);
-                startActivity(intent2);
-                break;
-        }
-
+        Intent intent = new Intent(this, AddScheduleActivity.class);
+        startActivity(intent);
         return true;
     }
 
