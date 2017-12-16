@@ -119,11 +119,8 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         else if(repeatnum == "매일"){ // 매일반복
             mManager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 86400000, pendingIntent());
         }
-        else if(repeatnum == "매주"){
-            mManager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 864000000, pendingIntent());////
-        }
-        else if(repeatnum == "매달"){
-
+        else if(repeatnum == "매주"){ // 매주반복
+            mManager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 604800000, pendingIntent());
         }
 
 
@@ -184,7 +181,6 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         ListItems.add("반복 없음");
         ListItems.add("매일");
         ListItems.add("매주");
-        ListItems.add("매달");
         final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
 
         // 선택된 아이템 (기본값 0)
