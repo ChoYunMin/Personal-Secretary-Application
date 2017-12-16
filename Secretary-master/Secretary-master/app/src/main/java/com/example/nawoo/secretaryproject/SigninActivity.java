@@ -157,7 +157,7 @@ public class SigninActivity extends AppCompatActivity {
 
 
                 URL url = new URL(
-                        "http://172.30.1.9:80/Secretary/SignIn.php");
+                        "http://172.30.1.9:8888/Secretary/SignIn.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

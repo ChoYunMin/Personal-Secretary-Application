@@ -21,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 URL url = new URL(
-                        "http://172.30.1.9:80/Secretary/getData.php");
+                        "http://172.30.1.9:8888/Secretary/getData.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
