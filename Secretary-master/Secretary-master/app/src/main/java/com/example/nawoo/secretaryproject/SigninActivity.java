@@ -27,6 +27,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/* 이것은 로그인 */
+
 public class SigninActivity extends AppCompatActivity {
 
     final Context context = this;

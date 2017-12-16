@@ -19,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/* 이것은 회원 가입 */
+
 public class JoinActivity extends AppCompatActivity {
 
     final Context context = this;
