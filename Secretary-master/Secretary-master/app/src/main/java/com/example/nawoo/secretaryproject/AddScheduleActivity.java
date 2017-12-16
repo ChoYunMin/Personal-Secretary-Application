@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -49,6 +51,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     */
     private NotificationManager mNotification;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
@@ -106,6 +109,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
     }
 
     // 알람의 설정
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setAlarm() throws MalformedURLException {
         // AlarmManager 호출
         //mManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
@@ -116,7 +120,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             mManager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 86400000, pendingIntent());
         }
         else if(repeatnum == "매주"){
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            mManager.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), 864000000, pendingIntent());////
         }
         else if(repeatnum == "매달"){
 
