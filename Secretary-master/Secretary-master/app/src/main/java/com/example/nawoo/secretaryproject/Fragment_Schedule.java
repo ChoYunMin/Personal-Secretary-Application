@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -70,6 +71,12 @@ public class Fragment_Schedule extends Fragment {
         task = new phpDown();
         txtView = (TextView)v.findViewById(R.id.txtView);
         task.execute("http://211.214.113.144:8888/Dproject/userSchedule.php");
+
+        mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                //////////////스키줄 눌렀을 때 activity_detail_schedule로 넘어가기
+            }
+        });
 
         return v;
     }

@@ -56,5 +56,29 @@ public class PHPRequest {
         }
     }
 
+    // 스케줄 타입도 저장
+    public String AddScheduleType(final String title, final Integer type){
+        try{
+            String postData = "SCHEDULENAME=" + title + "&" + "SCHEDULETYPE=" + type;
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestMethod("POST");
+            conn.setConnectTimeout(5000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(postData.getBytes("UTF-8"));
+            outputStream.flush();
+            outputStream.close();
+            String result = readStream(conn.getInputStream());
+            conn.disconnect();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.i("PHPRequest", "request was failed.");
+            return null;
+        }
+    }
+
 
 }
