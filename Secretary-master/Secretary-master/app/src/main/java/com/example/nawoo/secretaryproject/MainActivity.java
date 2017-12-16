@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // ActionBar에 타이틀 변경
-        getSupportActionBar().setTitle("조윤민");
+        //getSupportActionBar().setTitle("조윤민");
         // ActionBar의 배경색 변경
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF891D32));
 

@@ -47,6 +47,11 @@
             android:textColor="@color/white"
             android:text="반복 횟수 설정"/>
 
+        <FrameLayout
+            android:id="@+id/fagment_view_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
