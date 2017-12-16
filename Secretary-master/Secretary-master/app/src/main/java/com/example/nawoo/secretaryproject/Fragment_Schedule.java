@@ -142,7 +142,7 @@ public class Fragment_Schedule extends Fragment {
                 OutputStream outputStream = conn.getOutputStream();
                 outputStream.write(postData.getBytes("UTF-8"));
                 outputStream.flush();
-                outputStream.close();
+                //outputStream.close();
                 conn.disconnect();
 
 
