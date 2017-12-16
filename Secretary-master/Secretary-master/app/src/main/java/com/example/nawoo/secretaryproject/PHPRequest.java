@@ -56,27 +56,5 @@ public class PHPRequest {
         }
     }
 
-    // 현재 로그인 된 사용자 아이디 전송
-    public String SendUserID(final String userID){
-        try{
-            String postData = "USERID=" + userID;
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestMethod("POST");
-            conn.setConnectTimeout(5000);
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            OutputStream outputStream = conn.getOutputStream();
-            outputStream.write(postData.getBytes("UTF-8"));
-            outputStream.flush();
-            outputStream.close();
-            String result = readStream(conn.getInputStream());
-            conn.disconnect();
-            return result;
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.i("PHPRequest", "request was failed.");
-            return null;
-        }
-    }
+
 }

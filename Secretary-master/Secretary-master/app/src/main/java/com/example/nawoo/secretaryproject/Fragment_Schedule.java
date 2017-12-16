@@ -98,7 +98,7 @@ public class Fragment_Schedule extends Fragment {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            mTextViewResult.setText(result);
+            //mTextViewResult.setText(result);
             Log.d(TAG, "response  - " + result);
 
             if (result == null){
@@ -122,15 +122,7 @@ public class Fragment_Schedule extends Fragment {
             try {
                 URL url = new URL(serverURL);
                 // userID 보내는 경로
-                //PHPRequest request = new PHPRequest(serverURL);
-                //String sendUserID = request.SendUserID(SessionControl.loginID);
-                /*if(sendUserID.equals("1")){
-                    //Toast.makeText(getApplication(), "들어감", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "들어감들어감");
-                }
-                else{
-                    //Toast.makeText(getApplication(), "안들어감", Toast.LENGTH_SHORT).show();
-                }*/
+
 
                 String postData = "USERID=" + SessionControl.loginID;
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -142,7 +134,7 @@ public class Fragment_Schedule extends Fragment {
                 OutputStream outputStream = conn.getOutputStream();
                 outputStream.write(postData.getBytes("UTF-8"));
                 outputStream.flush();
-                outputStream.close();
+                //outputStream.close();
                 conn.disconnect();
 
 
