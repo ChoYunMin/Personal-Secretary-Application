@@ -2,6 +2,7 @@ package com.example.nawoo.secretaryproject;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,13 +75,14 @@ public class Fragment_Schedule extends Fragment {
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                //////////////스키줄 눌렀을 때 activity_detail_schedule로 넘어가기
+                //스키줄 눌렀을 때 activity_detail_schedule로 넘어가기
+                Intent intent = new Intent(getActivity(), DetailScheduleActivity.class);
+                startActivity(intent);
             }
         });
 
         return v;
     }
-
     Button.OnClickListener mClickListener = new View.OnClickListener(){
         public void onClick(View v){
 
