@@ -70,7 +70,7 @@ public class Fragment_Schedule extends Fragment {
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                //스키줄 눌렀을 때 activity_detail_schedule로 넘어가기
+                //스케줄 눌렀을 때 activity_detail_schedule로 넘어가기
                 Intent intent = new Intent(getActivity(), DetailScheduleActivity.class);
                 intent.putExtra("schedule", mlistView.getItemAtPosition(position).toString());
                 startActivity(intent);

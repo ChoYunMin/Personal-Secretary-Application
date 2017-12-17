@@ -7,10 +7,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,6 +89,34 @@ public class DetailScheduleActivity extends AppCompatActivity {
 
         task = new phpDown();
         task.execute("http://211.214.113.144:8888/Dproject/userScheduleType.php");
+
+        // 삭제 버튼 눌렀을 때
+        Button b = (Button)findViewById(R.id.btn_delete_schedule);
+        b.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                new Thread(){
+                    public void run(){
+                        try{
+                            PHPRequest request = new PHPRequest("http://211.214.113.144:8888/Dproject/delete_schedule.php");
+                            String request_result = request.DeleteSchedule(SessionControl.loginID, scheduleTitle);
+                            if(request_result.equals("1")){
+                                //Toast.makeText(getApplication(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                // 삭제 성공
+                            }
+                            else{
+                                //Toast.makeText(getApplication(), "이미 삭제되었거나 연결이 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        catch(MalformedURLException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+
+                finish();
+            }
+        });
     }
 
 
