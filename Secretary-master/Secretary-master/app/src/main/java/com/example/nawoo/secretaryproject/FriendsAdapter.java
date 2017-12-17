@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import static com.example.nawoo.secretaryproject.R.id.friend_id;
-import static com.example.nawoo.secretaryproject.R.id.friend_name;
 
 /**
  * Created by nawoo on 2017-12-17.
@@ -19,12 +18,12 @@ import static com.example.nawoo.secretaryproject.R.id.friend_name;
 public class FriendsAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<FriendsItem> data;
-    private int layout;
+    private Context mContext = null;
 
-    public FriendsAdapter(Context context, int layout, ArrayList<FriendsItem> data){
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+    public FriendsAdapter(Context context, ArrayList<FriendsItem> data){
+        this.mContext = context;
         this.data = data;
-        this.layout = layout;
     }
 
     @Override
@@ -34,19 +33,45 @@ public class FriendsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        if(convertView == null){
-            convertView = inflater.inflate(layout,parent,false);
+        View v = convertView;
+        if(v == null){
+            this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.friends_list,parent,false);
         }
-        FriendsItem friendsItem = data.get(position);
 
-        TextView userID = (TextView)convertView.findViewById(friend_id);
-        userID.setText(friendsItem.getID());
+        TextView userID = (TextView)v.findViewById(R.id.friend_set_id);
+        userID.setText(getItem(position).getID());
 
-        TextView status = (TextView)convertView.findViewById(friend_name);
-        status.setText(friendsItem.getStatus());
+        TextView status = (TextView)v.findViewById(R.id.friend_set_name);
+        status.setText(getItem(position).getStatus());
 
-        return convertView;
+        Button acp_button = (Button)v.findViewById(R.id.btn_accept);
+        acp_button.setEnabled(true);
+        acp_button.setTag(position);
+        acp_button.setOnClickListener(buttonClickListener);
+
+        String getStatus = getItem(position).getStatus();
+
+        if(!getStatus.equals("apply"))
+        {
+            acp_button.setVisibility(v.INVISIBLE);
+            acp_button.setEnabled(false);
+        }
+
+        return v;
     }
+
+    private View.OnClickListener buttonClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            switch(v.getId()){
+                case R.id.btn_accept:
+                    Toast.makeText(mContext,"버튼 Tag = " + v.getTag(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     public long getItemId(int position){
@@ -54,7 +79,19 @@ public class FriendsAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position){
-        return data.get(position).getID();
+    public FriendsItem getItem(int position){
+
+        return data.get(position);
+    }
+
+    @Override
+    protected  void finalize() throws Throwable{
+        free();
+        super.finalize();
+    }
+    private void free(){
+        inflater =  null;
+        data = null;
+        mContext = null;
     }
 }

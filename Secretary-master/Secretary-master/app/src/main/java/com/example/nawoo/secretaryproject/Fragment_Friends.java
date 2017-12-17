@@ -43,22 +43,22 @@ public class Fragment_Friends extends Fragment {
 
     private TextView textView;
 
-    ArrayList<FriendsItem> fArrayList;
-    ListView flistView;
+
+    ListView flistView = null;
     String fJsonString;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        View view =  inflater.inflate(R.layout.fragment_friends, container, false);
 
-        textView = (TextView) view.findViewById(R.id.txt);
-        flistView = (ListView) view.findViewById(R.id.friends_list);
-        fArrayList = new ArrayList<>();
+        View v = inflater.inflate(R.layout.fragment_friends, container, false);
+
+        textView = (TextView) v.findViewById(R.id.txt);
+        flistView = (ListView) v.findViewById(R.id.friends_list_view);
 
         getFriend gfd = new getFriend();
         gfd.execute();
 
-        return inflater.inflate(R.layout.fragment_friends, container, false);
+        return v;
     }
 
     public class getFriend extends AsyncTask<Void, Integer, String> {
@@ -82,10 +82,6 @@ public class Fragment_Friends extends Fragment {
             String param = "USERID=" + SessionControl.loginID;
             Log.e("POST", param);
             try {
-/* 서버연결 */
-                /*UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(nameValuePairList, "UTF-8");
-                httpPost.setEntity(urlEncodedFormEntity);
-                HttpResponse httpResponse = httpclient.execute(httpPost);*/
 
 
                 URL url = new URL(
@@ -129,7 +125,7 @@ public class Fragment_Friends extends Fragment {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            textView.setText(result);
+            //textView.setText(result);
             Log.d(TAG, "response  - " + result);
 
             if (result == null){
@@ -143,10 +139,13 @@ public class Fragment_Friends extends Fragment {
             }
         }
     }
-    private void showResult(){
+    private void showResult() {
         try {
+            ArrayList<FriendsItem> fArrayList = new ArrayList<>();
             JSONObject jsonObject = new JSONObject(fJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+
 
             for(int i=0;i<jsonArray.length();i++){
 
@@ -173,12 +172,11 @@ public class Fragment_Friends extends Fragment {
 
                 fArrayList.add(friendsItem);
             }
+            FriendsAdapter friendsAdapter = new FriendsAdapter(this.getContext(), fArrayList);
 
-            FriendsAdapter adapter = new FriendsAdapter(this.getContext(), R.layout.friends_list, fArrayList);
+            flistView.setAdapter(friendsAdapter);
 
-            flistView.setAdapter(adapter);
-
-        } catch (JSONException e) {
+        }catch (JSONException e) {
 
             Log.d(TAG, "showResult : ", e);
         }

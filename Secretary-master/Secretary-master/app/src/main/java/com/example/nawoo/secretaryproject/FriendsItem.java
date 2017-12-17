@@ -6,11 +6,13 @@ package com.example.nawoo.secretaryproject;
 
 public class FriendsItem {
     private String fID;
+    private String fName;
     private String Status;
 
     public String getID(){
         return fID;
     }
+    public String getName() {return fName;}
     public String getStatus(){
         return Status;
     }
