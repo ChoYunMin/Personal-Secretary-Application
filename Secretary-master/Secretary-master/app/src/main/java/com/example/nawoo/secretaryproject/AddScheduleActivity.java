@@ -15,6 +15,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -282,6 +283,12 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
             Button btnSetFunction = new Button(this);
             btnSetFunction.setText("날씨 정보 설정하기");
+            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            params.setMargins(0, 0, 0, 20);
+            btnSetFunction.setBackgroundResource(R.color.pastel);
+            btnSetFunction.setTextColor(getResources().getColor(R.color.white));
+            btnSetFunction.setTextSize(20);
             // 버튼이 눌리면
             btnSetFunction.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
@@ -297,6 +304,12 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
             Button btnSetFunction2 = new Button(this);
             btnSetFunction2.setText("교통상황 보기 정보 설정하기");
+            params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+            params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            params.setMargins(0, 0, 0, 20);
+            btnSetFunction2.setBackgroundResource(R.color.pastel);
+            btnSetFunction2.setTextColor(getResources().getColor(R.color.white));
+            btnSetFunction2.setTextSize(20);
             // 버튼이 눌리면
             btnSetFunction2.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
