@@ -300,7 +300,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             // 버튼이 눌리면
             btnSetFunction2.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
-
+                    newIntent(index);
                 }
             });
             btnSetFunction2.setLayoutParams(params);
