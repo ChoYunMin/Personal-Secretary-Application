@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,13 +45,11 @@ public class Fragment_Schedule extends Fragment {
     private static final String TAG_DATE="date";
     private static final String TAG_TIME="time";
 
-    private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
     ListView mlistView;
     String mJsonString;
 
     phpDown task;
-    TextView txtView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
@@ -65,18 +62,17 @@ public class Fragment_Schedule extends Fragment {
         v.findViewById(R.id.btn_fri).setOnClickListener(mClickListener);
         v.findViewById(R.id.btn_sat).setOnClickListener(mClickListener);
 
-        mTextViewResult = (TextView)v.findViewById(R.id.txtView);
         mlistView = (ListView)v.findViewById(R.id.lsitView_list);
         mArrayList = new ArrayList<>();
 
         task = new phpDown();
-        txtView = (TextView)v.findViewById(R.id.txtView);
         task.execute("http://211.214.113.144:8888/Dproject/userSchedule.php");
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 //스키줄 눌렀을 때 activity_detail_schedule로 넘어가기
                 Intent intent = new Intent(getActivity(), DetailScheduleActivity.class);
+                intent.putExtra("schedule", mlistView.getItemAtPosition(position).toString());
                 startActivity(intent);
             }
         });
@@ -111,7 +107,7 @@ public class Fragment_Schedule extends Fragment {
 
             if (result == null){
 
-                mTextViewResult.setText(errorString);
+               // mTextViewResult.setText(errorString);
             }
             else {
 
