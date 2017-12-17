@@ -1,6 +1,7 @@
 package com.example.nawoo.secretaryproject;
 
 import android.app.AlarmManager;
+import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
 import java.net.MalformedURLException;
@@ -117,6 +119,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                 showSelectFunctionDialog();
             }
         });
+
     }
 
     // 알람의 설정
@@ -262,9 +265,58 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                     if(chkList[k-1]){
                         // type을 저장하는 list에 선택된 타입들 저장
                         selectedFunctions.add(k);
+                        addBtn(k);
                     }
                 }
             }
         }).show();
+
+
+
+    }
+
+    // LinearLayout params 정의(동적 버튼 생성)
+    private void addBtn(final int index){
+        if(index == 2){ // 날씨정보
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
+            Button btnSetFunction = new Button(this);
+            btnSetFunction.setText("날씨 정보 설정하기");
+            // 버튼이 눌리면
+            btnSetFunction.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    newIntent(index);
+                }
+            });
+            btnSetFunction.setLayoutParams(params);
+            btnLayout.addView(btnSetFunction);
+        }
+
+        if(index == 3){ // 교통정보
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
+            Button btnSetFunction2 = new Button(this);
+            btnSetFunction2.setText("교통상황 보기 정보 설정하기");
+            // 버튼이 눌리면
+            btnSetFunction2.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+
+                }
+            });
+            btnSetFunction2.setLayoutParams(params);
+            btnLayout.addView(btnSetFunction2);
+        }
+    }
+
+    private void newIntent(int index){
+        if(index == 2){
+            Intent setFunctionIntent = new Intent(this, SetWeatherActivity.class);
+            startActivity(setFunctionIntent);
+        }
+        else if(index == 3){
+            Intent setFunctionIntent = new Intent(this, SetTrafficActivity.class);
+            startActivity(setFunctionIntent);
+        }
+
     }
 }
