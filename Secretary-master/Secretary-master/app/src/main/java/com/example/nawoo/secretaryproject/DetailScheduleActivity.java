@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -102,7 +103,6 @@ public class DetailScheduleActivity extends AppCompatActivity {
                             String request_result = request.DeleteSchedule(SessionControl.loginID, scheduleTitle);
                             if(request_result.equals("1")){
                                 //Toast.makeText(getApplication(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                                // 삭제 성공
                             }
                             else{
                                 //Toast.makeText(getApplication(), "이미 삭제되었거나 연결이 유효하지 않습니다.", Toast.LENGTH_SHORT).show();

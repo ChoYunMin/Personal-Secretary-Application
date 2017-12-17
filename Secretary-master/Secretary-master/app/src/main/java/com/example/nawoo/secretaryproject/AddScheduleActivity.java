@@ -62,6 +62,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
 
+
         // 통지 매니저를 취득
         mNotification = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
