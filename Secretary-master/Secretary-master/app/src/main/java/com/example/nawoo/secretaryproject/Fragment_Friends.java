@@ -40,6 +40,8 @@ public class Fragment_Friends extends Fragment {
     private static final String TAG_USER1="user1";
     private static final String TAG_USER2="user2";
     private static final String TAG_STATUS="status";
+    private static final String TAG_USER1_NAME = "u1_name";
+    private static final String TAG_USER2_NAME = "u2_name";
 
     private TextView textView;
 
@@ -151,24 +153,20 @@ public class Fragment_Friends extends Fragment {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String friend;
+                String receiver;
+                String requester;
 
                 String user1 = item.getString(TAG_USER1);
                 String user2 = item.getString(TAG_USER2);
                 String status = item.getString(TAG_STATUS);
+                String u1_name = item.getString(TAG_USER1_NAME);
+                String u2_name = item.getString(TAG_USER2_NAME);
+
+                requester = user1;
+                receiver = user2;
 
 
-
-                if(user1.equals(SessionControl.loginID))
-                {
-                    friend = user2;
-                }
-                else
-                {
-                    friend = user1;
-                }
-
-                FriendsItem friendsItem = new FriendsItem(friend, status);
+                FriendsItem friendsItem = new FriendsItem(requester, receiver, u1_name, u2_name ,status);
 
                 fArrayList.add(friendsItem);
             }

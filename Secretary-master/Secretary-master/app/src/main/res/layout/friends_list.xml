@@ -65,10 +65,10 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:background="#CCEAC0B9"
+            android:background="@color/mainColor"
             android:textColor="@color/white"
             android:text="accept"
-            android:visibility="visible"
+            android:visibility="invisible"
             />
     </LinearLayout>
 

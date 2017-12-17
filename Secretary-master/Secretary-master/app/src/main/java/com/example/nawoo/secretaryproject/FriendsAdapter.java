@@ -40,22 +40,34 @@ public class FriendsAdapter extends BaseAdapter {
         }
 
         TextView userID = (TextView)v.findViewById(R.id.friend_set_id);
-        userID.setText(getItem(position).getID());
+        userID.setTag(position);
 
-        TextView status = (TextView)v.findViewById(R.id.friend_set_name);
-        status.setText(getItem(position).getStatus());
+        TextView userName = (TextView)v.findViewById(R.id.friend_set_name);
+        userName.setTag(position);
 
         Button acp_button = (Button)v.findViewById(R.id.btn_accept);
-        acp_button.setEnabled(true);
+        acp_button.setEnabled(false);
         acp_button.setTag(position);
         acp_button.setOnClickListener(buttonClickListener);
 
-        String getStatus = getItem(position).getStatus();
+        String chk_user = getItem(position).getRequester();
 
-        if(!getStatus.equals("apply"))
+        if(chk_user.equals(SessionControl.loginID))
         {
-            acp_button.setVisibility(v.INVISIBLE);
-            acp_button.setEnabled(false);
+            userID.setText(getItem(position).getID());
+            userName.setText(getItem(position).getU2Name());
+        }
+        else
+        {
+            userID.setText(getItem(position).getRequester());
+            userName.setText(getItem(position).getU1Name());
+
+            String getStatus = getItem(position).getStatus();
+            if(getStatus.equals("apply"))
+            {
+                acp_button.setVisibility(v.VISIBLE);
+                acp_button.setEnabled(true);
+            }
         }
 
         return v;
@@ -66,8 +78,9 @@ public class FriendsAdapter extends BaseAdapter {
         public void onClick(View v){
             switch(v.getId()){
                 case R.id.btn_accept:
-                    Toast.makeText(mContext,"버튼 Tag = " + v.getTag(),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,"버튼 Tag = " + v.getTag(), Toast.LENGTH_SHORT).show();
+
+
                     break;
             }
         }
