@@ -2,12 +2,14 @@ package com.example.nawoo.secretaryproject;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,7 +46,7 @@ public class Fragment_Friends extends Fragment {
     private static final String TAG_USER2_NAME = "u2_name";
 
     private TextView textView;
-
+    ArrayList<FriendsItem> fArrayList;
 
     ListView flistView = null;
     String fJsonString;
@@ -52,6 +54,7 @@ public class Fragment_Friends extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
 
+        fArrayList = new ArrayList<>();
         View v = inflater.inflate(R.layout.fragment_friends, container, false);
 
         textView = (TextView) v.findViewById(R.id.txt);
@@ -59,6 +62,39 @@ public class Fragment_Friends extends Fragment {
 
         getFriend gfd = new getFriend();
         gfd.execute();
+
+        flistView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id){
+                Intent intent = new Intent(getActivity(), FriendsClicked.class);
+
+                if(fArrayList.get(position).getStatus().equals("apply"))
+                {
+                    return;
+                }
+
+                intent.putExtra("Requester", fArrayList.get(position).getRequester());
+                intent.putExtra("Receiver", fArrayList.get(position).getID());
+                intent.putExtra("RequesterName", fArrayList.get(position).getU1Name());
+                intent.putExtra("ReceiverName", fArrayList.get(position).getU2Name());
+                intent.putExtra("Status", fArrayList.get(position).getStatus());
+
+                String chk_user = fArrayList.get(position).getRequester();
+
+                if(chk_user.equals(SessionControl.loginID))
+                {
+                    CurrentFriend.friendID = fArrayList.get(position).getID();
+                    CurrentFriend.friendName = fArrayList.get(position).getU2Name();
+                }
+                else
+                {
+                    CurrentFriend.friendID = fArrayList.get(position).getRequester();
+                    CurrentFriend.friendName = fArrayList.get(position).getU1Name();
+                }
+
+                startActivity(intent);
+            }
+        });
 
         return v;
     }
@@ -143,7 +179,7 @@ public class Fragment_Friends extends Fragment {
     }
     private void showResult() {
         try {
-            ArrayList<FriendsItem> fArrayList = new ArrayList<>();
+
             JSONObject jsonObject = new JSONObject(fJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
