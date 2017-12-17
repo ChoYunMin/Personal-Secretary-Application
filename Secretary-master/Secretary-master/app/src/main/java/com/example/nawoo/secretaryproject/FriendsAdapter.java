@@ -20,6 +20,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.example.nawoo.secretaryproject.R.id.btn_accept;
+
 /**
  * Created by nawoo on 2017-12-17.
  */
@@ -44,7 +46,6 @@ public class FriendsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         View v = convertView;
-        curPosition = position;
         if(v == null){
             this.inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.friends_list,parent,false);
@@ -56,7 +57,7 @@ public class FriendsAdapter extends BaseAdapter {
         TextView userName = (TextView)v.findViewById(R.id.friend_set_name);
         userName.setTag(position);
 
-        Button acp_button = (Button)v.findViewById(R.id.btn_accept);
+        Button acp_button = (Button)v.findViewById(btn_accept);
         acp_button.setEnabled(false);
         acp_button.setTag(position);
         acp_button.setOnClickListener(buttonClickListener);
@@ -89,8 +90,9 @@ public class FriendsAdapter extends BaseAdapter {
         public void onClick(View v){
 
             switch(v.getId()){
-                case R.id.btn_accept:
+                case btn_accept:
                     modifyFriendDB mfd = new modifyFriendDB();
+                    curPosition = (Integer)v.getTag();
                     mfd.execute();
                     break;
             }

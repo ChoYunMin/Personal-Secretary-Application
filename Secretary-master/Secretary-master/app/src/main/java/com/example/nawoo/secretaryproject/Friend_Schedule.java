@@ -48,12 +48,20 @@ public class Friend_Schedule extends Fragment {
     ListView mlistView;
     String mJsonString;
 
+    TextView friendsSchedule;
+
     getFriendSchedule task;
     TextView txtView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View v = inflater.inflate(R.layout.friend_schedule, container, false);
+
+        friendsSchedule = (TextView)v.findViewById(R.id.FriendScheduleListText);
+
+        String friends = CurrentFriend.friendName + "'s Schedule";
+
+        friendsSchedule.setText(friends);
 
         v.findViewById(R.id.f_btn_sun).setOnClickListener(mClickListener);
         v.findViewById(R.id.f_btn_mon).setOnClickListener(mClickListener);
