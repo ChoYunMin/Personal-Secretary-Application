@@ -3,12 +3,15 @@ package com.example.nawoo.secretaryproject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,51 +22,54 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class InfoModifyActivity extends AppCompatActivity {
+public class InfoModifyActivity extends AppCompatActivity implements TimePicker.OnTimeChangedListener{
 
     final Context context = this;
-    EditText et_pw, et_pw_chk, et_name;
-    String sPw, sPw_chk, sName;
+
+    // 설정 일시
+    private GregorianCalendar wCalendar;
+    private GregorianCalendar sCalendar;
+
+    String wtimestr;
+    String stimestr;
+
+    private TimePicker wTime;
+    private TimePicker sTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_modify);
 
-        et_pw = (EditText) findViewById(R.id.mdf_Password);
-        et_pw_chk = (EditText) findViewById(R.id.mdf_Password_chk);
-        et_name = (EditText) findViewById(R.id.mdf_Name);
+        wCalendar = new GregorianCalendar();
+        sCalendar = new GregorianCalendar();
+
+        wTime = (TimePicker)findViewById(R.id.WakeUpTime);
+        wTime.setHour(wCalendar.get(Calendar.HOUR_OF_DAY));
+        wTime.setMinute(wCalendar.get(Calendar.MINUTE));
+        wTime.setOnTimeChangedListener(this);
+
+        sTime = (TimePicker)findViewById(R.id.SleepTime);
+        sTime.setHour(sCalendar.get(Calendar.HOUR_OF_DAY));
+        sTime.setMinute(sCalendar.get(Calendar.MINUTE));
+        sTime.setOnTimeChangedListener(this);
     }
 
     public void bt_Modify_ok(View view)
     {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
 
-        sPw = et_pw.getText().toString();
-        sPw_chk = et_pw_chk.getText().toString();
-        sName = et_name.getText().toString();
+        wtimestr = Integer.toString(wTime.getHour()) + ":" + Integer.toString(wTime.getMinute()) + ":" + "00";
+        stimestr = Integer.toString(sTime.getHour()) + ":" + Integer.toString(sTime.getMinute()) + ":" + "00";
 
-        if(sPw.equals(sPw_chk))
-        {
-            modifyDB rdb = new modifyDB();
-            rdb.execute();
-        }
-        else{
-            Log.e("RESULT","비밀번호 확인 실패");
-            alertBuilder
-                    .setTitle("알림")
-                    .setMessage("비밀번호와 비밀번호 확인이 다릅니다.")
-                    .setCancelable(true)
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    });
-            AlertDialog dialog = alertBuilder.create();
-            dialog.show();
-        }
+        modifyDB rdb = new modifyDB();
+        rdb.execute();
     }
+
+    // 시각 설정 클래스의 상태변화 리스너
+    @Override
+    public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
+    }
+
     public class modifyDB extends AsyncTask<Void, Integer, Void> {
         String data = "";
 
@@ -71,7 +77,7 @@ public class InfoModifyActivity extends AppCompatActivity {
         protected Void doInBackground(Void... unused) {
 
 /* 인풋 파라메터값 생성 */
-            String param = "u_id=" + SessionControl.loginID + "&u_pw=" + sPw + "&u_name=" + sName + "";
+            String param = "u_id=" + SessionControl.loginID + "&w_time=" + wtimestr + "&s_time=" + stimestr + "";
             try {
 /* 서버연결 */
                 URL url = new URL(
@@ -123,7 +129,6 @@ public class InfoModifyActivity extends AppCompatActivity {
 
             if (data.equals("succeed")) {
                 Log.e("RESULT", "성공적으로 처리되었습니다!");
-                SessionControl.loginName = sName;
                 alertBuilder
                         .setTitle("알림")
                         .setMessage("성공적으로 수정되었습니다!")

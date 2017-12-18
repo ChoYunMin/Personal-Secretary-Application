@@ -74,6 +74,17 @@
                 android:layout_alignParentBottom="true"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/user_reset_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="bt_to_reset"
+                android:text="적정 수면 시간"
+                android:layout_alignParentBottom="true"
+                android:textStyle="bold" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.example.nawoo.secretaryproject;
 
 import android.app.AlarmManager;
-import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,7 +14,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,8 +24,6 @@ import android.widget.TimePicker;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.sql.Types.INTEGER;
 
 /**
  * Created by dbsal on 2017-12-12.
@@ -181,7 +177,6 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                 e.printStackTrace();
             }
         }
-
         finish();
     }
 

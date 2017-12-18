@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -33,12 +34,14 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private boolean isFragmentSchedule;
+    public static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContext = this;
 
         getData gdt = new getData();
         gdt.execute();
@@ -74,13 +77,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         // ActionBar에 + 버튼을 클릭했을 때의 동작
-        if(isFragmentSchedule){
-            Intent intent1 = new Intent(this, AddScheduleActivity.class);
-            startActivity(intent1);
-        } else {
-            Intent intent2 = new Intent(this, AddFreindActivity.class);
-            startActivity(intent2);
+
+        switch (item.getItemId()) {
+            case R.id.user_info:
+                Intent intent = new Intent(this, UserInfoActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.add_schedule:
+                if(isFragmentSchedule){
+                    Intent intent1 = new Intent(this, AddScheduleActivity.class);
+                    startActivity(intent1);
+                } else {
+                    Intent intent2 = new Intent(this, AddFreindActivity.class);
+                    startActivity(intent2);
+                }
+                return true;
         }
+
 
         return true;
     }
@@ -101,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_fragment_view, fr);
         fragmentTransaction.commit();
     }
+
     public class getData extends AsyncTask<Void, Integer, Void> {
 
         HttpURLConnection conn = null;

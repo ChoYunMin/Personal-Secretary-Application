@@ -1,11 +1,9 @@
 package com.example.nawoo.secretaryproject;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +33,7 @@ import java.util.HashMap;
 
 public class DetailScheduleActivity extends AppCompatActivity {
     TextView txt_title;
+
     TextView txt_date;
     TextView txt_time;
     TextView txt_memo;
@@ -116,6 +114,19 @@ public class DetailScheduleActivity extends AppCompatActivity {
                 }.start();
 
                 finish();
+            }
+        });
+
+        Button wtr = (Button)findViewById(R.id.btn_weather_schedule);
+        wtr.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                new Thread(){
+                    public void run(){
+                        Intent intent1 = new Intent(getApplicationContext(), SetWeatherActivity.class);
+                        startActivity(intent1);
+                    }
+                }.start();
             }
         });
     }
