@@ -101,6 +101,7 @@ public class DetailScheduleActivity extends AppCompatActivity {
                         try{
                             PHPRequest request = new PHPRequest("http://211.214.113.144:8888/Dproject/delete_schedule.php");
                             String request_result = request.DeleteSchedule(SessionControl.loginID, scheduleTitle);
+
                             if(request_result.equals("1")){
                                 //Toast.makeText(getApplication(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                             }
