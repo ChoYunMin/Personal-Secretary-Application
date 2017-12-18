@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by dbsal on 2017-12-18.
  */
 
-public class SetTrafficActivity extends AppCompatActivity {
+public class SetTrafficActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

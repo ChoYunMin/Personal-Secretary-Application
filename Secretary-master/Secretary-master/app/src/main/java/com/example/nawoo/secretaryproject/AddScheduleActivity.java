@@ -283,7 +283,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
             Button btnSetFunction = new Button(this);
-            btnSetFunction.setText("날씨 정보 설정하기");
+            btnSetFunction.setText("날씨 정보 보기");
             params.width = LinearLayout.LayoutParams.MATCH_PARENT;
             params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
             params.setMargins(0, 0, 0, 20);
