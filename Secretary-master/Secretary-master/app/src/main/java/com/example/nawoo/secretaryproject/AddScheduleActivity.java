@@ -27,6 +27,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.sql.Types.INTEGER;
+
 /**
  * Created by dbsal on 2017-12-12.
  */
@@ -71,6 +73,19 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         // 현재 시각을 취득
         mCalendar = new GregorianCalendar();
         Log.i("HelloAlarmActivity", mCalendar.getTime().toString());
+
+        // 일시 설정 클래스로 현재 시각을 설정
+        mDate = (DatePicker)findViewById(R.id.schedule_datePicker);
+        mDate.init(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH), this);
+        mTime = (TimePicker)findViewById(R.id.schedule_timePicker);
+        mTime.setHour(mCalendar.get(Calendar.HOUR_OF_DAY));
+        mTime.setMinute(mCalendar.get(Calendar.MINUTE));
+        mTime.setOnTimeChangedListener(this);
+
+        // 스케줄 제목과 메모 저장
+        title = (EditText)findViewById(R.id.schedule_title);
+        memo = (EditText)findViewById(R.id.schedule_memo);
+
         // 셋 버튼, 취소버튼 리스너 등록
         Button b = (Button)findViewById(R.id.btn_set_schedule);
         b.setOnClickListener(new View.OnClickListener(){
@@ -93,18 +108,6 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                 cancelAlarm();
             }
         });
-
-        // 일시 설정 클래스로 현재 시각을 설정
-        mDate = (DatePicker)findViewById(R.id.schedule_datePicker);
-        mDate.init(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH), this);
-        mTime = (TimePicker)findViewById(R.id.schedule_timePicker);
-        mTime.setHour(mCalendar.get(Calendar.HOUR_OF_DAY));
-        mTime.setMinute(mCalendar.get(Calendar.MINUTE));
-        mTime.setOnTimeChangedListener(this);
-
-        // 스케줄 제목과 메모 저장
-        title = (EditText)findViewById(R.id.schedule_title);
-        memo = (EditText)findViewById(R.id.schedule_memo);
 
         // 반복횟수 지정 라디오 다이얼로그
         b = (Button)findViewById(R.id.btn_set_repeat);
@@ -190,7 +193,13 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
 
     //알람 설정 시간에 발생하는 인텐트 작성
     private PendingIntent pendingIntent(){
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+        i.putExtra("title", title.getText().toString());
+        i.putExtra("memo", memo.getText().toString());
+        i.putExtra("typenum", selectedFunctions.size());
+        for(int a = 0; a < selectedFunctions.size(); a++){
+            i.putExtra("type" + String.valueOf(a+1), selectedFunctions.get(a));
+        }
         PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
         return pi;
     }

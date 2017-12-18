@@ -46,6 +46,7 @@
         <activity android:name=".FriendsClicked" />
         <activity android:name=".SetWeatherActivity"/>
         <activity android:name=".SetTrafficActivity"/>
+        <activity android:name=".AlarmReceiver"/>
     </application>
 
 </manifest>
