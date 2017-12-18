@@ -42,7 +42,8 @@
         <activity android:name=".AddFreindActivity" />
         <activity android:name=".DetailScheduleActivity" />
         <activity android:name=".FriendsClicked" />
-
+        <activity android:name=".SetWeatherActivity"/>
+        <activity android:name=".SetTrafficActivity"/>
     </application>
 
 </manifest>

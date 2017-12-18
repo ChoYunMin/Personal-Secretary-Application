@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,7 @@ public class Fragment_Schedule extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailScheduleActivity.class);
                 intent.putExtra("schedule", mlistView.getItemAtPosition(position).toString());
                 startActivity(intent);
+
             }
         });
 
