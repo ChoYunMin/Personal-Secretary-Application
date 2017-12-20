@@ -18,14 +18,35 @@
         android:layout_weight="1"
         android:id="@+id/main_fragment_view"/>
 
-    <Button
-        android:id="@+id/switch_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Switch Fragment"
-        android:layout_alignParentBottom="true"
-        android:textColor="@drawable/text_color_selector"
-        android:background="@drawable/my_button"
-        android:textSize="20sp"/>
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/btn_schedule"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:textColor="@drawable/text_color_selector"
+            android:background="@drawable/imgbtn_background_selector"
+            android:focusableInTouchMode="true"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/imgbtn_schedule_selector"/>
+
+        <ImageButton
+            android:id="@+id/btn_friends"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:textColor="@drawable/text_color_selector"
+            android:background="@drawable/imgbtn_background_selector"
+            android:focusableInTouchMode="true"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/imgbtn_friend_selector"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

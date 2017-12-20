@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +37,9 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private boolean isFragmentSchedule;
     public static Context mContext;
+
+    ImageButton buttonFragSchedule;
+    ImageButton buttonFragFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         // ActionBar의 배경색 변경
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF891D32));
 
+        buttonFragSchedule = (ImageButton)findViewById(R.id.btn_schedule);
+        buttonFragFriend = (ImageButton)findViewById(R.id.btn_friends);
+
         // shedule/friends 프래그먼트 변경
         isFragmentSchedule = true;
         android.app.FragmentManager fm = getFragmentManager();
@@ -58,11 +66,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.main_fragment_view, new Fragment_Schedule());
         fragmentTransaction.commit();
 
-        // 프래그먼트 변경 버튼
-        Button buttonFragSwitch = (Button)findViewById(R.id.switch_button);
-        buttonFragSwitch.setOnClickListener(new Button.OnClickListener(){
+        // 프래그먼트 변경 버튼 - default값은 스케줄 버튼 눌림 상태
+        buttonFragSchedule.setSelected(true);
+        buttonFragSchedule.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
-                switchFragment();
+                //switchFragment();
+                switchFragtoSchedule();
+            }
+        });
+
+        buttonFragFriend.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                //switchFragment();
+                switchFragtoFriend();
             }
         });
 
@@ -105,10 +121,34 @@ public class MainActivity extends AppCompatActivity {
 
         if(isFragmentSchedule){
             fr = new Fragment_Schedule();
+            buttonFragSchedule.setSelected(false);
+            buttonFragFriend.setSelected(true);
         } else {
             fr = new Fragment_Friends();
+            buttonFragSchedule.setSelected(true);
+            buttonFragFriend.setSelected(false);
         }
 
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.main_fragment_view, fr);
+        fragmentTransaction.commit();
+    }
+
+    public void switchFragtoSchedule(){
+        buttonFragSchedule.setSelected(false);
+        buttonFragFriend.setSelected(true);
+        Fragment fr = new Fragment_Schedule();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.main_fragment_view, fr);
+        fragmentTransaction.commit();
+    }
+
+    public void switchFragtoFriend(){
+        buttonFragSchedule.setSelected(true);
+        buttonFragFriend.setSelected(false);
+        Fragment fr = new Fragment_Friends();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.main_fragment_view, fr);
