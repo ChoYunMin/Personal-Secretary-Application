@@ -7,6 +7,9 @@
     <color name="btn_default_color">#EFE8E4</color>
     <color name="invisiableColor">#00ff0000</color>
     <color name="pastel">#CCEAC0B9</color>
+    <color name="pastel2">#DDCBCD</color>
+    <color name="pastel3">#D6D9DD</color>
+    <color name="pastel4">#E4E4E7</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 </resources>

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/moon"
     tools:context="com.example.nawoo.secretaryproject.UserInfoActivity">
 
     <!-- Login progress -->
@@ -28,6 +29,7 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="30dp"
             android:orientation="vertical">
 
 
@@ -42,6 +44,7 @@
                 android:id="@+id/userID"
                 android:maxLines="1"
                 android:textSize="20sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 />
 
@@ -58,32 +61,42 @@
                     android:id="@+id/userName"
                     android:maxLines="1"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:textColor="@color/black" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/user_modify_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:onClick="bt_to_Modify"
-                android:text="Modify"
                 android:layout_alignParentBottom="true"
-                android:textStyle="bold" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp">
 
-            <Button
-                android:id="@+id/user_reset_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:onClick="bt_to_reset"
-                android:text="적정 수면 시간"
-                android:layout_alignParentBottom="true"
-                android:textStyle="bold" />
+                <Button
+                    android:id="@+id/user_modify_button"
+                    style="?android:textAppearanceSmall"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mainColor"
+                    android:onClick="bt_to_Modify"
+                    android:text="수면시간 설정"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/user_reset_button"
+                    style="?android:textAppearanceSmall"
+                    android:padding="10dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mainColor"
+                    android:onClick="bt_to_reset"
+                    android:text="나의 적정 수면시간"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
