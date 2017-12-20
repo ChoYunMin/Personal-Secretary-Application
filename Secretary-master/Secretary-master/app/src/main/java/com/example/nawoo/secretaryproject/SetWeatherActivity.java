@@ -45,9 +45,6 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
     LocationManager locationManager;
     double latitude; // 위도
     double longitude; // 경도
-    String city = "용인";
-    String county = "기흥구";
-    String village = "서천동";
     TextView latText, lonText, weather, temperature, mint;
     ImageView w_icon;
 
@@ -129,10 +126,8 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
 
     @Override
     public void onLocationChanged(Location location){
-        //latitude = location.getLatitude();
-        //longitude = location.getLongitude();
-        latitude = 37.249554;
-        longitude = 127.077864;
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
         //날씨 가져오기 통신
         getWeather(latitude, longitude);
@@ -238,6 +233,7 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
                         cur_county = cur_county.substring(1, cur_county.length()-1);
                         cur_village = cur_village.substring(1, cur_village.length()-1);
                         Code = Code.substring(1, Code.length()-1);
+                        Name = Name.substring(1, Name.length()-1);
                         maxtmp = maxtmp.substring(1, maxtmp.length()-1);
                         mintmp = mintmp.substring(1, mintmp.length()-1);
                         maxtmp = "최고 기온 : " + maxtmp + "'";
@@ -268,12 +264,12 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
                                 w_icon.setImageResource(R.drawable.w32);
                         }
 
-                        latText.setText(cur_county);
+                        latText.setText(cur_county + " ");
                         lonText.setText(cur_village);
 
                         weather.setText(Name);
-                        temperature.setText(maxtmp);
-                        mint.setText(mintmp);
+                        temperature.setText(maxtmp + " ");
+                        mint.setText(" " + mintmp);
 
                     }
 

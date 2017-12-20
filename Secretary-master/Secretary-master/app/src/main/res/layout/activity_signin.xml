@@ -70,10 +70,10 @@
                 android:text="Auto Login" />
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/email_sign_in_button"
@@ -81,20 +81,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:onClick="bt_Sign_In"
                     android:background="@color/mainColor"
-                    android:textColor="@color/white"
-                    android:text="@string/action_sign_in" />
+                    android:onClick="bt_Sign_In"
+                    android:text="@string/action_sign_in"
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/register_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="bt_to_Join"
                     android:background="@color/mainColor"
-                    android:textColor="@color/white"
-                    android:text="@string/action_register"/>
+                    android:onClick="bt_to_Join"
+                    android:text="@string/action_register"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

@@ -6,40 +6,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.nawoo.secretaryproject.SetWeatherActivity">
-    <TextView
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="시,군"
-        android:textColor="@android:color/black"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="23151615"
-        android:id="@+id/latitude"
-        android:textColor="@android:color/black"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="동"
-        android:textColor="@android:color/black"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="3213132"
-        android:id="@+id/longitude"
-        android:textColor="@android:color/black"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="23151615"
+            android:id="@+id/latitude"
+            android:textColor="@color/mainColor"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="3213132"
+            android:id="@+id/longitude"
+            android:textColor="@color/mainColor"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -52,10 +48,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="날씨"
-        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textColor="@color/mainColor"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
+        android:textSize="25dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,21 +60,24 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:id="@+id/weather"
-        android:textSize="17dp"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/mainColor"
         android:text="온도"
-        android:textColor="@android:color/black"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
+        android:textSize="25dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp">
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,9 +85,8 @@
             android:textColor="@android:color/black"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
             android:id="@+id/temperature"
-            android:textSize="17dp"/>
+            android:textSize="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,9 +94,8 @@
             android:textColor="@android:color/black"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="120dp"
             android:id="@+id/temperaturemin"
-            android:textSize="17dp"/>
+            android:textSize="20dp"/>
 
     </LinearLayout>
 </LinearLayout>

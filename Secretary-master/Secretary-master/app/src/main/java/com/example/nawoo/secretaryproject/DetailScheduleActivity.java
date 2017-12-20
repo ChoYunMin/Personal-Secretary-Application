@@ -128,10 +128,15 @@ public class DetailScheduleActivity extends AppCompatActivity {
 
         Button wtr = (Button)findViewById(R.id.btn_weather_schedule);
 
-        if(curType.equals("2"))
+        if(curType.equals("2") )
         {
             wtr.setEnabled(true);
-            wtr.setVisibility(View.INVISIBLE);
+            wtr.setText("날씨 확인");
+        }
+
+        if(curType.equals("3")){
+            wtr.setEnabled(true);
+            wtr.setText("지도 확인");
         }
 
         wtr.setOnClickListener(new View.OnClickListener(){
@@ -139,8 +144,16 @@ public class DetailScheduleActivity extends AppCompatActivity {
 
                 new Thread(){
                     public void run(){
-                        Intent intent1 = new Intent(getApplicationContext(), SetWeatherActivity.class);
-                        startActivity(intent1);
+                        if(curType.equals("2"))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), SetWeatherActivity.class);
+                            startActivity(intent);
+                        }
+                        else if(curType.equals("3"))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), SetTrafficActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 }.start();
             }

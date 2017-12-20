@@ -57,7 +57,7 @@
         android:padding="5dp"
         android:background="@color/mainColor"
         android:textColor="@color/white"
-        android:text="날씨 확인" />
+        android:text="확인" />
 
     <Button
         android:id="@+id/btn_delete_schedule"
