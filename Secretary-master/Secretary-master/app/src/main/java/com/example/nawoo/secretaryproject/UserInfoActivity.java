@@ -6,18 +6,35 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UserInfoActivity extends AppCompatActivity {
 
     public static Context iContext;
 
+    SimpleDateFormat dateFormat;
+    Date wu;
+    Date sp;
+    Date properWakeUp;
+    Date properSleep;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
+
+
+        SessionControl.wakeUp = "07:00:00";
+        SessionControl.sleep = "20:00:00";
 
         iContext = this;
 
@@ -43,9 +60,47 @@ public class UserInfoActivity extends AppCompatActivity {
         b_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                try{
+                    dateFormat = new SimpleDateFormat("HH:mm:ss");
+                    properWakeUp = dateFormat.parse("07:00:00");
+                    wu = dateFormat.parse(SessionControl.wakeUp);
+                    properSleep = dateFormat.parse("22:00:00");
+                    sp = dateFormat.parse(SessionControl.sleep);
+                }catch(ParseException e)
+                {
+
+                }
+
+                Calendar ppWakeUp = Calendar.getInstance();
+                Calendar WakUp = Calendar.getInstance();
+                Calendar ppSleep = Calendar.getInstance();
+                Calendar slep = Calendar.getInstance();
+                ppWakeUp.setTime(properWakeUp);
+                WakUp.setTime(wu);
+                ppSleep.setTime(properSleep);
+                slep.setTime(sp);
+
+                long ppWakeUpTime = ppWakeUp.getTimeInMillis()/3600000;
+                long WakUpTime = WakUp.getTimeInMillis()/3600000;
+                long ppSleepTime = ppSleep.getTimeInMillis()/3600000;
+                long slepTime = slep.getTimeInMillis()/3600000;
+
+                long calSleep = ppSleepTime - slepTime;
+                calSleep = calSleep * 1000 * 60 * 5;
+                calSleep = ppSleep.getTimeInMillis() - calSleep;
+
+                final String sleepString = DateFormat.format("HH:mm:ss", new Date(calSleep)).toString();
+
+                long calWake = ppWakeUpTime - WakUpTime;
+                calWake = calWake * 1000 * 60 * 5;
+                calWake = ppWakeUp.getTimeInMillis() - calWake;
+
+                final String wakeUpString = DateFormat.format("HH:mm:ss", new Date(calWake)).toString();
+
                 alertBuilder
                         .setTitle("알림")
-                        .setMessage("적정 수면 시간 : 오후 9:55 적정 기상 시간 : 오전 6:00")
+                        .setMessage("적정 수면 시간 :" + sleepString +  "     적정 기상 시간 : " + wakeUpString)
                         .setCancelable(true)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override

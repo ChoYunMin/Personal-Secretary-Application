@@ -1,7 +1,9 @@
 package com.example.nawoo.secretaryproject;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -49,6 +51,8 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
     TextView latText, lonText, weather, temperature, mint;
     ImageView w_icon;
 
+    public static Context mContext;
+
     long dday;
 
     SimpleDateFormat dateFormat;
@@ -66,6 +70,7 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
         setContentView(R.layout.antivity_set_weather);
         initView();
         locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        mContext = this;
 
         try{
             dateFormat = new  SimpleDateFormat("yyyy-MM-dd");
@@ -84,11 +89,24 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
             Log.d("error " , "message : ", e);
         }
 
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mContext);
 
 
         if(dday > 14)
         {
-            latText.setText("날씨 정보가 없습니다.");
+            alertBuilder
+                    .setTitle("알림")
+                    .setMessage("날씨 정보가 없습니다!")
+                    .setCancelable(true)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+            AlertDialog dialog = alertBuilder.create();
+            dialog.show();
+            finish();
         }
         else
         {
@@ -202,12 +220,20 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
 
                         String strdday = Long.toString(dday);
 
-                        Code = skyObject.get("pmCode" + strdday +"day").toString();
-                        Name = skyObject.get("pmName" +strdday +"day").toString();
-                        maxtmp = temperObject.get("tmax" + strdday +"day").toString();
-                        mintmp = temperObject.get("tmin" + strdday +"day").toString();
-
-
+                        if(dday >= 0 && dday < 3)
+                        {
+                            Code = skyObject.get("pmCode3day").toString();
+                            Name = skyObject.get("pmName3day").toString();
+                            maxtmp = temperObject.get("tmax3day").toString();
+                            mintmp = temperObject.get("tmin3day").toString();
+                        }
+                        else
+                        {
+                            Code = skyObject.get("pmCode" + strdday +"day").toString();
+                            Name = skyObject.get("pmName" +strdday +"day").toString();
+                            maxtmp = temperObject.get("tmax" + strdday +"day").toString();
+                            mintmp = temperObject.get("tmin" + strdday +"day").toString();
+                        }
 
                         cur_county = cur_county.substring(1, cur_county.length()-1);
                         cur_village = cur_village.substring(1, cur_village.length()-1);

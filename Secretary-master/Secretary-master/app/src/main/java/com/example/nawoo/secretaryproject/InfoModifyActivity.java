@@ -21,6 +21,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class InfoModifyActivity extends AppCompatActivity implements TimePicker.OnTimeChangedListener{
 
@@ -35,6 +38,7 @@ public class InfoModifyActivity extends AppCompatActivity implements TimePicker.
 
     private TimePicker wTime;
     private TimePicker sTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,9 @@ public class InfoModifyActivity extends AppCompatActivity implements TimePicker.
         sTime.setHour(sCalendar.get(Calendar.HOUR_OF_DAY));
         sTime.setMinute(sCalendar.get(Calendar.MINUTE));
         sTime.setOnTimeChangedListener(this);
+
+
+
     }
 
     public void bt_Modify_ok(View view)
@@ -60,6 +67,9 @@ public class InfoModifyActivity extends AppCompatActivity implements TimePicker.
 
         wtimestr = Integer.toString(wTime.getHour()) + ":" + Integer.toString(wTime.getMinute()) + ":" + "00";
         stimestr = Integer.toString(sTime.getHour()) + ":" + Integer.toString(sTime.getMinute()) + ":" + "00";
+
+        SessionControl.wakeUp = wtimestr;
+        SessionControl.sleep = stimestr;
 
         modifyDB rdb = new modifyDB();
         rdb.execute();

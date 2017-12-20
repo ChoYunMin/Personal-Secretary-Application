@@ -7,4 +7,6 @@ package com.example.nawoo.secretaryproject;
 public class SessionControl {
     static public String loginID;
     static public String loginName;
+    static public String wakeUp;
+    static public String sleep;
 }
