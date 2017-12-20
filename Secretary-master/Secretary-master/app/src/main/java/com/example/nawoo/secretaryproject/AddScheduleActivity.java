@@ -283,7 +283,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
 
     // LinearLayout params 정의(동적 버튼 생성)
     private void addBtn(final int index){
-        if(index == 2){ // 날씨정보
+        /*if(index == 2){ // 날씨정보
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
             Button btnSetFunction = new Button(this);
@@ -302,7 +302,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             });
             btnSetFunction.setLayoutParams(params);
             btnLayout.addView(btnSetFunction);
-        }
+        }*/
 
         if(index == 3){ // 교통정보
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);

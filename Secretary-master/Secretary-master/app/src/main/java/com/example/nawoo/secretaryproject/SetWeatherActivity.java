@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +49,11 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
     TextView latText, lonText, weather, temperature, mint;
     ImageView w_icon;
 
+    long dday;
+
+    SimpleDateFormat dateFormat;
+    Date dt;
+
     // 최소 GPS 정보 업데이트 거리 10미터
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
 
@@ -56,9 +67,37 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
         initView();
         locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
 
-        if (locationManager != null) {
-            requestLocation();
+        try{
+            dateFormat = new  SimpleDateFormat("yyyy-MM-dd");
+            dt = dateFormat.parse(CurrentSchedule.Date);
+
+            Calendar today = Calendar.getInstance();
+            Calendar schcal = Calendar.getInstance();
+            schcal.setTime(dt);
+
+            long td = today.getTimeInMillis()/86400000;
+            long sd = schcal.getTimeInMillis()/86400000;
+
+            dday = sd - td;
+
+        } catch(ParseException e){
+            Log.d("error " , "message : ", e);
         }
+
+
+
+        if(dday > 14)
+        {
+            latText.setText("날씨 정보가 없습니다.");
+        }
+        else
+        {
+            if (locationManager != null) {
+                requestLocation();
+            }
+        }
+
+
     }
     private void initView() {
         //뷰세팅
@@ -125,7 +164,6 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
 
-                String cur_city = null;
                 String cur_county = null;
                 String cur_village = null;
 
@@ -156,10 +194,20 @@ public class SetWeatherActivity extends AppCompatActivity implements LocationLis
 
                         cur_county = gridObject.get("county").toString();
                         cur_village = gridObject.get("village").toString();
-                        String Code = skyObject.get("amCode3day").toString();
-                        String Name = skyObject.get("amName3day").toString();
-                        String maxtmp = temperObject.get("tmax3day").toString();
-                        String mintmp = temperObject.get("tmin3day").toString();
+
+                        String Code;
+                        String Name;
+                        String maxtmp;
+                        String mintmp;
+
+                        String strdday = Long.toString(dday);
+
+                        Code = skyObject.get("pmCode" + strdday +"day").toString();
+                        Name = skyObject.get("pmName" +strdday +"day").toString();
+                        maxtmp = temperObject.get("tmax" + strdday +"day").toString();
+                        mintmp = temperObject.get("tmin" + strdday +"day").toString();
+
+
 
                         cur_county = cur_county.substring(1, cur_county.length()-1);
                         cur_village = cur_village.substring(1, cur_village.length()-1);

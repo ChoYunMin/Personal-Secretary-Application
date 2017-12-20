@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -38,6 +39,8 @@ public class DetailScheduleActivity extends AppCompatActivity {
     TextView txt_time;
     TextView txt_memo;
 
+    private static String curType = "";
+
     private static String scheduleTitle;
     private static String scheduleDate;
     private static String scheduleTime;
@@ -68,20 +71,25 @@ public class DetailScheduleActivity extends AppCompatActivity {
         String scheduleInfo[] = parsing.split(", ");
 
         txt_title = (TextView)findViewById(R.id.txt_title);
-        scheduleTitle = scheduleInfo[1].substring(scheduleInfo[1].indexOf("=")+1);
+        scheduleTitle = scheduleInfo[3].substring(scheduleInfo[3].indexOf("=")+1);
         txt_title.setText(scheduleTitle);
 
         txt_date = (TextView)findViewById(R.id.txt_date);
-        scheduleDate = scheduleInfo[0].substring(scheduleInfo[0].indexOf("=")+1);
+        scheduleDate = scheduleInfo[1].substring(scheduleInfo[1].indexOf("=")+1);
         txt_date.setText(scheduleDate);
 
         txt_time = (TextView)findViewById(R.id.txt_time);
-        scheduleTime = scheduleInfo[2].substring(scheduleInfo[2].indexOf("=")+1);
+        scheduleTime = scheduleInfo[0].substring(scheduleInfo[0].indexOf("=")+1);
         txt_time.setText(scheduleTime);
 
         txt_memo = (TextView)findViewById(R.id.txt_memo);
-        scheduleMemo = scheduleInfo[3].substring(scheduleInfo[3].indexOf("=")+1);
+        scheduleMemo = scheduleInfo[2].substring(scheduleInfo[2].indexOf("=")+1);
         txt_memo.setText(scheduleMemo);
+
+        CurrentSchedule.Title = scheduleTitle;
+        CurrentSchedule.Memo = scheduleMemo;
+        CurrentSchedule.Date = scheduleDate;
+        CurrentSchedule.Time = scheduleTime;
 
         mlistView = (ListView)findViewById(R.id.listView_schedule_type);
         mArrayList = new ArrayList<>();
@@ -91,6 +99,7 @@ public class DetailScheduleActivity extends AppCompatActivity {
 
         // 삭제 버튼 눌렀을 때
         Button b = (Button)findViewById(R.id.btn_delete_schedule);
+
         b.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
@@ -118,6 +127,13 @@ public class DetailScheduleActivity extends AppCompatActivity {
         });
 
         Button wtr = (Button)findViewById(R.id.btn_weather_schedule);
+
+        if(curType.equals("2"))
+        {
+            wtr.setEnabled(true);
+            wtr.setVisibility(View.INVISIBLE);
+        }
+
         wtr.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
@@ -247,6 +263,7 @@ public class DetailScheduleActivity extends AppCompatActivity {
 
                 String title = item.getString(TAG_TITLE);
                 String type = item.getString(TAG_TYPE);
+                curType = type;
 
                 if(type.equals("1")){
                     type = type + ". 알람 울려주기";
@@ -282,5 +299,21 @@ public class DetailScheduleActivity extends AppCompatActivity {
             Log.d(TAG, "showResult : ", e);
         }
 
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        if(event.getAction() == KeyEvent.ACTION_DOWN)
+        {
+            if(keyCode == KeyEvent.KEYCODE_BACK)
+            {
+                CurrentSchedule.Title = "";
+                CurrentSchedule.Memo = "";
+                CurrentSchedule.Date = "";
+                CurrentSchedule.Time = "";
+            }
+        }
+
+        return super.onKeyDown(keyCode,event);
     }
 }

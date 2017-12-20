@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +25,20 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+
+import static com.example.nawoo.secretaryproject.R.id.btn_fri;
+import static com.example.nawoo.secretaryproject.R.id.btn_mon;
+import static com.example.nawoo.secretaryproject.R.id.btn_sat;
+import static com.example.nawoo.secretaryproject.R.id.btn_sun;
+import static com.example.nawoo.secretaryproject.R.id.btn_thu;
+import static com.example.nawoo.secretaryproject.R.id.btn_tue;
+import static com.example.nawoo.secretaryproject.R.id.btn_wed;
 
 
 /**
@@ -52,16 +63,30 @@ public class Fragment_Schedule extends Fragment {
 
     phpDown task;
 
+    int selDay;
+
+    Button sun,mon,tue,wed,thu,fri,sat;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
 
-        v.findViewById(R.id.btn_sun).setOnClickListener(mClickListener);
-        v.findViewById(R.id.btn_mon).setOnClickListener(mClickListener);
-        v.findViewById(R.id.btn_tue).setOnClickListener(mClickListener);
-        v.findViewById(R.id.btn_wed).setOnClickListener(mClickListener);
-        v.findViewById(R.id.btn_thu).setOnClickListener(mClickListener);
-        v.findViewById(R.id.btn_fri).setOnClickListener(mClickListener);
-        v.findViewById(R.id.btn_sat).setOnClickListener(mClickListener);
+        sun = (Button)v.findViewById(btn_sun);
+        sun.setOnClickListener(mClickListener);
+        mon = (Button)v.findViewById(btn_mon);
+        mon.setOnClickListener(mClickListener);
+        tue = (Button)v.findViewById(btn_tue);
+        tue.setOnClickListener(mClickListener);
+        wed = (Button)v.findViewById(btn_wed);
+        wed.setOnClickListener(mClickListener);
+        thu = (Button)v.findViewById(btn_thu);
+        thu.setOnClickListener(mClickListener);
+        fri = (Button)v.findViewById(btn_fri);
+        fri.setOnClickListener(mClickListener);
+        sat = (Button)v.findViewById(btn_sat);
+        sat.setOnClickListener(mClickListener);
+
+        v.findViewById(R.id.btn_sun).setSelected(true);
+        selDay = 1;
 
         mlistView = (ListView)v.findViewById(R.id.lsitView_list);
         mArrayList = new ArrayList<>();
@@ -84,8 +109,55 @@ public class Fragment_Schedule extends Fragment {
     Button.OnClickListener mClickListener = new View.OnClickListener(){
         public void onClick(View v){
 
+            initSelected();
+
+
+            switch(v.getId()){
+                case btn_sun:
+                    sun.setSelected(true);
+                    selDay = 1;
+                    break;
+                case btn_mon:
+                    mon.setSelected(true);
+                    selDay = 2;
+                    break;
+                case btn_tue:
+                    tue.setSelected(true);
+                    selDay = 3;
+                    break;
+                case btn_wed:
+                    wed.setSelected(true);
+                    selDay = 4;
+                    break;
+                case btn_thu:
+                    thu.setSelected(true);
+                    selDay = 5;
+                    break;
+                case btn_fri:
+                    fri.setSelected(true);
+                    selDay = 6;
+                    break;
+                case btn_sat:
+                    sat.setSelected(true);
+                    selDay = 7;
+                    break;
+            }
+
+
+            phpDown exe = new phpDown();
+            exe.execute("http://211.214.113.144:8888/Dproject/userSchedule.php");
         }
     };
+
+    private void initSelected(){
+        sun.setSelected(false);
+        mon.setSelected(false);
+        tue.setSelected(false);
+        wed.setSelected(false);
+        thu.setSelected(false);
+        fri.setSelected(false);
+        sat.setSelected(false);
+    }
 
     private class phpDown extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog;
@@ -196,6 +268,7 @@ public class Fragment_Schedule extends Fragment {
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            mArrayList = new ArrayList<>();
 
             for(int i=0;i<jsonArray.length();i++){
 
@@ -213,7 +286,17 @@ public class Fragment_Schedule extends Fragment {
                 hashMap.put(TAG_DATE, date);
                 hashMap.put(TAG_TIME, time);
 
-                mArrayList.add(hashMap);
+                SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd");
+                Date dt = dateFormat.parse(date);
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(dt);
+
+                int dayNum = cal.get(Calendar.DAY_OF_WEEK);
+
+                if(dayNum == selDay){
+                    mArrayList.add(hashMap);
+                }
             }
 
             ListAdapter adapter = new SimpleAdapter(
@@ -226,6 +309,8 @@ public class Fragment_Schedule extends Fragment {
 
         } catch (JSONException e) {
 
+            Log.d(TAG, "showResult : ", e);
+        } catch (ParseException e){
             Log.d(TAG, "showResult : ", e);
         }
 
