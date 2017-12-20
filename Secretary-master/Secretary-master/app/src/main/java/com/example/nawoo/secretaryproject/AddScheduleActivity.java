@@ -237,7 +237,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         });
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which){
-                    repeatnum="";
+                    repeatnum="반복 없음";
                     if(!SelectedItems.isEmpty()){
                         int index = (int)SelectedItems.get(0);
                         repeatnum = ListItems.get(index);
