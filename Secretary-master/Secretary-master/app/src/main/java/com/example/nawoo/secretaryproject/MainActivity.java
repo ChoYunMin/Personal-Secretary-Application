@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /*
     public void switchFragment(){
         Fragment fr;
 
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_fragment_view, fr);
         fragmentTransaction.commit();
     }
+    */
 
     public void switchFragtoSchedule(){
         buttonFragSchedule.setSelected(false);

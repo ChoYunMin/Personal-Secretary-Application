@@ -191,6 +191,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
         Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
         i.putExtra("title", title.getText().toString());
         i.putExtra("memo", memo.getText().toString());
+        i.putExtra("date", Integer.toString(mDate.getYear()) + "-" + Integer.toString(mDate.getMonth() + 1) + "-" + Integer.toString(mDate.getDayOfMonth()));
         i.putExtra("typenum", selectedFunctions.size());
         for(int a = 0; a < selectedFunctions.size(); a++){
             i.putExtra("type" + String.valueOf(a+1), selectedFunctions.get(a));

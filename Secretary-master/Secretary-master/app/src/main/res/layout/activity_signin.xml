@@ -80,9 +80,11 @@
                     style="?android:textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:onClick="bt_Sign_In"
-                    android:text="@string/action_sign_in"
-                    android:textStyle="bold" />
+                    android:background="@color/mainColor"
+                    android:textColor="@color/white"
+                    android:text="@string/action_sign_in" />
 
                 <Button
                     android:id="@+id/register_button"
@@ -90,8 +92,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="bt_to_Join"
-                    android:text="@string/action_register"
-                    android:textStyle="bold" />
+                    android:background="@color/mainColor"
+                    android:textColor="@color/white"
+                    android:text="@string/action_register"/>
 
             </LinearLayout>
 
