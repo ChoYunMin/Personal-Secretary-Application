@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -138,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     */
 
     public void switchFragtoSchedule(){
+        isFragmentSchedule = true;
         buttonFragSchedule.setSelected(false);
         buttonFragFriend.setSelected(true);
         Fragment fr = new Fragment_Schedule();
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchFragtoFriend(){
+        isFragmentSchedule = false;
         buttonFragSchedule.setSelected(true);
         buttonFragFriend.setSelected(false);
         Fragment fr = new Fragment_Friends();
