@@ -98,6 +98,9 @@ public class UserInfoActivity extends AppCompatActivity {
 
                 final String wakeUpString = DateFormat.format("HH:mm:ss", new Date(calWake)).toString();
 
+                SessionControl.wakeUp = wakeUpString;
+                SessionControl.sleep = sleepString;
+
                 alertBuilder
                         .setTitle("알림")
                         .setMessage("적정 수면 시간 :" + sleepString +  "     적정 기상 시간 : " + wakeUpString)
