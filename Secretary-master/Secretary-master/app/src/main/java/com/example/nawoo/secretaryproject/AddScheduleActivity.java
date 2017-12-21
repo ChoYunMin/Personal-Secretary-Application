@@ -305,7 +305,7 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
             btnLayout.addView(btnSetFunction);
         }*/
 
-/*        if(index == 3){ // 교통정보
+        /*if(index == 3){ // 교통정보
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             LinearLayout btnLayout = (LinearLayout)findViewById(R.id.linearlayout_set_function);
             Button btnSetFunction2 = new Button(this);
@@ -323,8 +323,8 @@ public class AddScheduleActivity extends AppCompatActivity implements DatePicker
                 }
             });
             btnSetFunction2.setLayoutParams(params);
-            btnLayout.addView(btnSetFunction2);*/
-        }
+            btnLayout.addView(btnSetFunction2);
+        }*/
     }
 
     private void newIntent(int index){

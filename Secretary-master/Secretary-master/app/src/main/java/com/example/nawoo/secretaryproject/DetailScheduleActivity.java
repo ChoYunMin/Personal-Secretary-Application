@@ -131,12 +131,10 @@ public class DetailScheduleActivity extends AppCompatActivity {
         if(curType.equals("2") )
         {
             wtr.setEnabled(true);
-            wtr.setText("날씨 확인");
         }
 
         if(curType.equals("3")){
             wtr.setEnabled(true);
-            wtr.setText("지도 확인");
         }
 
         wtr.setOnClickListener(new View.OnClickListener(){
